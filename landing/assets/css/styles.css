@@ -238,22 +238,24 @@ img{max-width:100%;display:block}
 /* ==========================================================================
    Fixed-viewport layout
    - No page scroll: only the form card scrolls.
-   - Lamborghini shield pinned top-left, Urus SE logo pinned bottom-left.
-   - Hero text block and form block share one horizontal centre line.
+   - Form on the left, visual column on the right.
+   - Lamborghini shield pinned top-right; Urus SE logo sits above the title.
+   - Hero block and form block share one horizontal centre line.
    ========================================================================== */
-:root{--card-pad:clamp(22px,2.4vw,40px);--edge:clamp(20px,3.75vw,72px);--edge-r:clamp(16px,6.6vw,128px);--vpad:clamp(56px,9vh,110px)}
+:root{--card-pad:clamp(22px,2.4vw,40px);--edge:clamp(20px,3.75vw,72px);--edge-f:clamp(16px,6.6vw,128px);--vpad:clamp(56px,9vh,110px);--col-f:min(780px,50vw);--gap:clamp(24px,4vw,80px);
+  /* right (visual) column, in viewport coordinates */
+  --vis-l:calc(var(--edge-f) + var(--col-f) + var(--gap));--vis-r:var(--edge)}
 html,body{height:100%}
 body{overflow:hidden}
 .page{height:100vh;height:100dvh;min-height:0;max-width:none;margin:0;overflow:hidden;overflow:clip;
-  grid-template-columns:minmax(0,1fr) minmax(0,min(780px,50vw));grid-template-rows:minmax(0,1fr);align-items:center;
-  column-gap:clamp(24px,4vw,80px);padding:var(--vpad) var(--edge-r) var(--vpad) var(--edge)}
-.hero{position:static;display:block;height:auto;max-height:100%;padding:0;align-self:center;overflow:visible}
+  grid-template-columns:minmax(0,var(--col-f)) minmax(0,1fr);grid-template-rows:minmax(0,1fr);align-items:center;
+  column-gap:var(--gap);padding:var(--vpad) var(--edge) var(--vpad) var(--edge-f)}
+.panel{grid-column:1;grid-row:1;align-self:center;height:auto;max-height:100%;min-height:0;padding:0;gap:clamp(20px,3vh,34px)}
+.hero{grid-column:2;grid-row:1;position:static;display:block;height:auto;max-height:100%;padding:0;align-self:center;overflow:visible}
 .hero__body{gap:clamp(24px,5.5vh,64px)}
 .hero__kicker,.hero__meta{white-space:nowrap;font-size:clamp(15px,1.45vw,28px)}
-.hero__shield{position:fixed;top:var(--edge);left:var(--edge);width:clamp(44px,3vw,60px);z-index:4}
-.hero__logo{position:fixed;left:var(--edge);bottom:var(--edge);width:clamp(150px,10.3vw,200px);height:auto;z-index:4}
-.hero__shield,.mobile-logo{height:auto}
-.panel{align-self:center;height:auto;max-height:100%;min-height:0;padding:0;gap:clamp(20px,3vh,34px)}
+.hero__shield{position:fixed;top:var(--edge);right:var(--edge);left:auto;width:clamp(54px,3.8vw,74px);height:auto;z-index:4}
+.hero__logo{display:block;width:clamp(170px,15vw,300px);height:auto;margin:0 auto calc(clamp(24px,5.5vh,64px) * -.35)}
 .stepper{position:relative;top:auto;flex:none}
 .panel > .card{flex:0 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--card-pad);scrollbar-width:thin;scrollbar-color:rgba(242,229,0,.55) transparent}
 .panel > .card::-webkit-scrollbar{width:8px}
@@ -261,24 +263,24 @@ body{overflow:hidden}
 .panel > .card::-webkit-scrollbar-track{background:transparent}
 /* Continue / Back always sit after the last field */
 .card .actions{position:static;margin:30px 0 0;padding:0;background:none}
-.site-foot{position:fixed;right:var(--edge-r);bottom:calc(var(--edge) * .5);z-index:4;font-size:11px}
+.site-foot{position:fixed;left:var(--edge-f);right:auto;max-width:var(--col-f);bottom:calc(var(--edge) * .5);z-index:4;font-size:11px}
 .summary__empty{margin:0;font-size:14px;color:var(--faint)}
+/* darken the form side (left) more than the visual side */
+@media (min-width:901px){.bg::after{background:radial-gradient(120% 90% at 50% 40%,transparent 40%,rgba(0,0,0,.55) 100%),linear-gradient(270deg,rgba(0,0,0,.3),transparent 30%,transparent 50%,rgba(0,0,0,.5))}}
 
 @media (max-width:900px){
   .page{display:flex;flex-direction:column;align-items:stretch;padding:0 16px}
-  .hero{position:relative;display:flex;flex-direction:column;flex:none;max-height:none;min-height:0;padding:14px 0 6px;gap:10px;justify-content:flex-start;align-self:auto}
-  .hero{padding-top:58px}
-  .hero__shield{position:absolute;top:12px;left:0;width:34px}
-  .hero__logo{display:block;position:absolute;top:18px;left:auto;right:0;bottom:auto;width:112px}
-  .hero__body{gap:8px;flex:none}
-  .hero__kicker{font-size:13px}
-  .hero__title{max-width:300px}
+  .hero{order:-1;position:relative;display:flex;flex-direction:column;flex:none;max-height:none;min-height:0;padding:16px 0 6px;gap:10px;justify-content:flex-start;align-self:auto}
+  .hero__shield{position:absolute;top:12px;right:0;left:auto;width:44px}
+  .hero__body{gap:8px;flex:none;margin:0 52px}
+  .hero__logo{width:128px;margin:0 auto 2px}
+  .hero__kicker{display:none}
+  .hero__title{max-width:290px}
   .hero__meta{font-size:14px}
-  .hero__kicker,.hero__meta{white-space:normal}
+  .hero__meta{white-space:normal}
   .panel{flex:1 1 auto;align-self:auto;max-height:none;padding:10px 0 12px;gap:10px}
   .progress{position:relative;margin:0;padding:0 2px;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;flex:none}
   .panel > .card{flex:0 1 auto;--card-pad:18px}
-  .mobile-logo{display:none!important}
   .site-foot{position:static;flex:none;gap:12px;justify-content:center}
   .card .actions{flex-direction:row;align-items:center;margin-top:24px}
   .card .actions .btn{width:auto;flex:1}
@@ -286,6 +288,6 @@ body{overflow:hidden}
   .card .actions > span{display:none}
 }
 @media (max-width:900px) and (max-height:700px){
-  .hero__kicker{display:none}
-  .hero__title{max-width:240px}
+  .hero__title{max-width:230px}
+  .hero__logo{width:104px}
 }

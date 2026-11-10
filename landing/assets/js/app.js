@@ -10,7 +10,7 @@
   /* ---------- CONFIG (single source of truth — edit here) ---------- */
   const CONFIG = {
     location: 'Seville',              // ⚠ mockups say "Costa del Sol" — confirm with client
-    defaultDates: 'February · March 2027',
+    defaultDates: '2 – 4 March 2027',
     endpoint: '',                     // e.g. '/api/registrations' — empty = demo mode (no network call)
     freeNavigation: false,            // true = any step reachable without completing the previous ones (validation runs at Confirm)
     declineEndpoint: '',              // e.g. '/api/registrations/decline'
