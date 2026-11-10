@@ -6,7 +6,7 @@ Static site, no build step.
 |---|---|
 | `/` | Prototype: registration web + mailings toggle (no data is sent) |
 | `/landing/` | Production landing. Test with `?wave=B&email=jane@media.com&title=Ms&first_name=Jane&last_name=Doe` (add `&rsvp=no` for the decline screen) |
-| `/emails/` | Raw HTML e-mails (`01-save-the-date.html` … `05-reply-declined.html`) |
+| `/emails/` | Raw HTML e-mails (`01-invitation.html`, `02-registration-confirmed.html`, `03-reply-declined.html`) |
 
 ## Deploy
 1. Create a repo and push the contents of this folder to the root of `main`.
