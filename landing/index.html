@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Urus at its Peak — Media Registration</title>
+<meta name="description" content="Registration for the Urus SE Performante dynamic launch.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#000000">
+<link rel="preload" href="assets/fonts/Lambotype-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/LambotypeUltraCnd-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/img/bg-peak.jpg" as="image" media="(min-width: 901px)">
+<link rel="stylesheet" href="assets/css/styles.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <div class="bg__layer is-active" data-bg="peak"></div>
+  <div class="bg__layer" data-bg="arcs"></div>
+  <div class="bg__layer" data-bg="curtain"></div>
+  <div class="bg__layer" data-bg="diagonal"></div>
+  <div class="bg__scan"></div>
+</div>
+
+<div class="page">
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <img class="hero__shield fade-up" style="--d:.1s" src="assets/img/shield-provisional.png" alt="Automobili Lamborghini">
+    <div class="hero__body">
+      <p class="hero__kicker fade-up" style="--d:.05s">Your journey to the <span class="y">summit</span> starts here.</p>
+      <h1 class="hero__title">
+        <span class="sr-only">Urus at its Peak</span>
+        <span class="slice slice--1" aria-hidden="true"><img src="assets/img/title-urus-at-its-peak.svg" alt="" width="1868" height="521"></span>
+        <span class="slice slice--2" aria-hidden="true"><img src="assets/img/title-urus-at-its-peak.svg" alt="" width="1868" height="521"></span>
+        <span class="slice slice--3" aria-hidden="true"><img src="assets/img/title-urus-at-its-peak.svg" alt="" width="1868" height="521"></span>
+      </h1>
+      <p class="hero__meta fade-up" style="--d:.8s"><span data-location>Seville</span> · <span class="y" data-hero-dates>February 2027</span></p>
+    </div>
+    <img class="hero__logo fade-up" style="--d:1s" src="assets/img/logo-urus-se-performante.svg" alt="Urus SE Performante" width="741" height="200">
+  </header>
+
+  <!-- ===================== PANEL ===================== -->
+  <main class="panel" id="main">
+
+    <ol class="stepper fade-up" style="--d:.4s" aria-label="Registration steps" id="stepper">
+      <li class="is-current"><button type="button" data-goto="0">1. Personal info</button></li>
+      <li><button type="button" data-goto="1">2. Documents</button></li>
+      <li><button type="button" data-goto="2">3. Travel &amp; stay</button></li>
+      <li><button type="button" data-goto="3">4. Activities</button></li>
+      <li><button type="button" data-goto="4">5. Confirmation</button></li>
+    </ol>
+    <div class="progress" aria-hidden="true">
+      <div class="progress__row"><b id="progressLabel">Personal info</b><span id="progressCount">1 / 5</span></div>
+      <div class="progress__bar"><i id="progressBar"></i></div>
+    </div>
+
+    <form class="card fade-up" style="--d:.55s" id="regForm" novalidate autocomplete="on">
+      <!-- Hidden / preset (not visible, not editable) -->
+      <input type="hidden" name="category" value="MEDIA GUESTS">
+      <input type="hidden" name="subcategory" value="">
+      <input type="hidden" name="wave" value="">
+      <input type="hidden" name="token" value="">
+
+      <!-- ============ STEP 1 · PERSONAL DATA ============ -->
+      <section class="step is-current" data-step="0" data-bg="peak" data-label="Personal info" aria-labelledby="s1t">
+        <div class="step__head">
+          <h2 class="step__title" id="s1t">Personal data</h2>
+          <p class="step__intro">Fields marked with * are mandatory.</p>
+        </div>
+        <div class="grid grid--3">
+          <div class="f">
+            <select id="title" name="title" required>
+              <option value="" disabled selected></option><option>Mr.</option><option>Ms.</option>
+            </select><label for="title">Title*</label>
+          </div>
+          <div class="f"><input id="first_name" name="first_name" required placeholder=" " autocomplete="given-name"><label for="first_name">First name*</label></div>
+          <div class="f"><input id="last_name" name="last_name" required placeholder=" " autocomplete="family-name"><label for="last_name">Last name*</label></div>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <div class="f">
+            <input id="email" name="email" type="email" required placeholder=" " autocomplete="email" readonly>
+            <label for="email">E-mail*</label>
+            <svg class="lock" viewBox="0 0 16 16" aria-hidden="true"><path fill="#fff" d="M4 7V5a4 4 0 118 0v2h1v8H3V7h1zm2 0h4V5a2 2 0 10-4 0v2z"/></svg>
+          </div>
+          <div class="f"><input id="mobile" name="mobile" type="tel" required placeholder=" " autocomplete="tel" pattern="\+?[0-9 \(\)\-]{7,20}"><label for="mobile">Mobile phone* (with country code)</label></div>
+          <div class="f span-2"><input id="address" name="address" required placeholder=" " autocomplete="street-address"><label for="address">Address*</label></div>
+          <div class="f"><input id="postal_code" name="postal_code" required placeholder=" " autocomplete="postal-code"><label for="postal_code">Postal code*</label></div>
+          <div class="f"><input id="city" name="city" required placeholder=" " autocomplete="address-level2"><label for="city">City*</label></div>
+          <div class="f span-2"><input id="state" name="state" required placeholder=" " autocomplete="address-level1"><label for="state">State / Province*</label></div>
+          <div class="f"><input id="company" name="company" required placeholder=" " autocomplete="organization"><label for="company">Company name*</label></div>
+          <div class="f"><input id="position" name="position" placeholder=" " autocomplete="organization-title"><label for="position">Position</label></div>
+        </div>
+      </section>
+
+      <!-- ============ STEP 2 · DOCUMENTS ============ -->
+      <section class="step" data-step="1" data-bg="arcs" data-label="Documents" aria-labelledby="s2t">
+        <div class="step__head">
+          <h2 class="step__title" id="s2t">Documents</h2>
+          <p class="step__intro">Needed to drive on track, issue your travel tickets and book your hotel.</p>
+        </div>
+
+        <fieldset class="group">
+          <legend class="group__title">Driving licence</legend>
+          <div class="grid">
+            <div class="f span-2"><input id="dl_number" name="dl_number" required placeholder=" " autocomplete="off"><label for="dl_number">Driving licence number*</label></div>
+            <div class="f"><input id="dl_issue" name="dl_issue" type="date" required data-past><label for="dl_issue">Issue date*</label></div>
+            <div class="f"><input id="dl_expiry" name="dl_expiry" type="date" required data-after-event><label for="dl_expiry">Expiry date*</label></div>
+            <div class="f span-2"><input id="dl_country" name="dl_country" required placeholder=" " list="countries" autocomplete="off"><label for="dl_country">Country of issue*</label></div>
+          </div>
+          <p class="note note--box">Please ensure that your driving licence is valid for driving in Spain / EU.</p>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend class="group__title">ID card / Passport</legend>
+          <p class="note">Necessary to issue your travel ticket and hotel reservation.</p>
+          <div class="grid">
+            <div class="f"><input id="doc_first_name" name="doc_first_name" required placeholder=" " autocomplete="off"><label for="doc_first_name">First name as shown on document*</label></div>
+            <div class="f"><input id="doc_last_name" name="doc_last_name" required placeholder=" " autocomplete="off"><label for="doc_last_name">Last name as shown on document*</label></div>
+            <div class="f"><input id="birth_date" name="birth_date" type="date" required data-past autocomplete="bday"><label for="birth_date">Date of birth*</label></div>
+            <div class="f"><input id="birth_place" name="birth_place" required placeholder=" "><label for="birth_place">Place of birth*</label></div>
+            <div class="f"><input id="nationality" name="nationality" required placeholder=" " list="countries" autocomplete="off"><label for="nationality">Nationality*</label></div>
+            <div class="f"><input id="residence_country" name="residence_country" required placeholder=" " list="countries" autocomplete="country-name"><label for="residence_country">Country of residence*</label></div>
+            <div class="f">
+              <select id="doc_type" name="doc_type" required>
+                <option value="" disabled selected></option><option>Passport</option><option>ID card</option>
+              </select><label for="doc_type">Document type*</label>
+            </div>
+            <div class="f"><input id="doc_number" name="doc_number" required placeholder=" " autocomplete="off"><label for="doc_number">Document number*</label></div>
+            <div class="f span-2"><input id="doc_country" name="doc_country" required placeholder=" " list="countries" autocomplete="off"><label for="doc_country">Country of issue*</label></div>
+            <div class="f"><input id="doc_issue" name="doc_issue" type="date" required data-past><label for="doc_issue">Issue date*</label></div>
+            <div class="f"><input id="doc_expiry" name="doc_expiry" type="date" required data-after-event data-six-months><label for="doc_expiry">Date of expiry*</label></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend class="group__title">Visa</legend>
+          <div class="choices">
+            <label class="choice"><input type="checkbox" name="visa_assistance" value="yes"><span>I need assistance to obtain a visa</span></label>
+          </div>
+          <div class="note note--box" style="margin-top:16px">
+            Citizens from non-EU countries may enter Spain with a passport valid for at least three months after the planned date of departure from the Schengen Area. If you need a visa to enter Spain, please contact your local Spanish embassy. You can find important information on the entry requirements for Spain <a href="https://www.spain.info/en/travel-tips/visa-passport/" target="_blank" rel="noopener">here</a>.<br><br>
+            Please note that applying for a visa is an individual process and we cannot apply on your behalf. Let us know as soon as possible if you need a visa for your trip to Spain: our concierge team will be pleased to support you by providing an invitation letter when needed.<br><br>
+            <strong>Important:</strong> please verify that your passport expires in at least six months' time.
+          </div>
+        </fieldset>
+      </section>
+
+      <!-- ============ STEP 3 · TRAVEL & STAY ============ -->
+      <section class="step" data-step="2" data-bg="curtain" data-label="Travel & stay" aria-labelledby="s3t">
+        <div class="step__head">
+          <h2 class="step__title" id="s3t">Travel &amp; stay</h2>
+          <p class="step__intro">Your travel will be arranged with arrival in <span data-location>Seville</span> on the afternoon of <b data-wave-from>Day 1</b> and departure on the morning of <b data-wave-to>Day 3</b>. Our concierge team will send you a tailored travel proposal (flight or train). We will require your explicit confirmation before issuing any travel documents.</p>
+        </div>
+
+        <fieldset class="group">
+          <legend class="group__title">Arrival / return details</legend>
+          <div class="grid">
+            <div class="f span-2">
+              <select id="travel_pref" name="travel_pref" required>
+                <option value="" disabled selected></option><option>Airport</option><option>Train</option><option>Own transport</option>
+              </select><label for="travel_pref">Travel preference*</label>
+            </div>
+            <div class="f span-2" data-when="travel_pref:Airport|Train">
+              <input id="travel_origin" name="travel_origin" required placeholder=" "><label for="travel_origin">Preferred departure / return airport or train station*</label>
+            </div>
+            <div class="span-2" data-when="travel_pref:Own transport">
+              <div class="choices"><label class="choice"><input type="checkbox" name="parking" value="yes"><span>Parking required</span></label></div>
+            </div>
+            <div class="f span-2"><textarea id="travel_comments" name="travel_comments" placeholder=" " rows="3"></textarea><label for="travel_comments">Travel comments / special requests</label></div>
+          </div>
+          <p class="note" style="margin-top:12px">Disclaimer: once travel tickets are confirmed and issued, they cannot be modified.</p>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend class="group__title">Hotel accommodation</legend>
+          <p class="note">Our concierge team will reserve a room — double for single use — under your name from <b data-wave-from>check-in</b> to <b data-wave-to>check-out</b> at <strong>Hotel Alfonso XIII</strong>, Calle San Fernando 2, Seville — <a href="https://www.marriott.com/en-us/hotels/svqlc-hotel-alfonso-xiii-a-luxury-collection-hotel-seville/overview/" target="_blank" rel="noopener">Website</a>.</p>
+          <p class="q">Please confirm you need the room*</p>
+          <div class="choices" data-required-group="hotel">
+            <label class="choice"><input type="radio" name="hotel" value="Yes" required><span>Yes</span></label>
+            <label class="choice"><input type="radio" name="hotel" value="No"><span>No</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend class="group__title">Food preferences</legend>
+          <div class="choices">
+            <label class="choice"><input type="checkbox" name="food" value="Vegetarian"><span>Vegetarian</span></label>
+            <label class="choice"><input type="checkbox" name="food" value="Vegan"><span>Vegan</span></label>
+            <label class="choice"><input type="checkbox" name="food" value="Nut allergy"><span>Nut allergy</span></label>
+            <label class="choice"><input type="checkbox" name="food" value="Gluten-free"><span>Gluten-free</span></label>
+            <label class="choice"><input type="checkbox" name="food" value="No seafood"><span>No seafood</span></label>
+            <label class="choice"><input type="checkbox" name="food" value="Lactose intolerance"><span>Lactose intolerance</span></label>
+            <label class="choice"><input type="checkbox" name="food" value="Other" id="food_other_toggle"><span>Other</span></label>
+          </div>
+          <div class="f" data-when="food:Other" style="margin-top:14px">
+            <input id="food_other" name="food_other" required placeholder=" "><label for="food_other">Please specify*</label>
+          </div>
+        </fieldset>
+      </section>
+
+      <!-- ============ STEP 4 · ACTIVITIES ============ -->
+      <section class="step" data-step="3" data-bg="diagonal" data-label="Activities" aria-labelledby="s4t">
+        <div class="step__head">
+          <h2 class="step__title" id="s4t">Track activities</h2>
+          <p class="step__intro">Select your preferred activities at the circuit. The PR team will coordinate and confirm your final activity schedule.</p>
+        </div>
+
+        <fieldset class="group">
+          <legend class="sr-only">Track activities</legend>
+          <p class="q">Would you like to request media activities?*</p>
+          <div class="choices" data-required-group="activities">
+            <label class="choice"><input type="radio" name="activities" value="Yes" required><span>Yes</span></label>
+            <label class="choice"><input type="radio" name="activities" value="No"><span>No</span></label>
+          </div>
+
+          <div data-when="activities:Yes" style="margin-top:22px">
+            <p class="group__title">Photo</p>
+            <div class="choices">
+              <label class="choice"><input type="checkbox" name="activity" value="Track photos car to car"><span>Track photos car to car</span></label>
+              <label class="choice"><input type="checkbox" name="activity" value="In-car photos"><span>In-car photos</span></label>
+              <label class="choice"><input type="checkbox" name="activity" value="Static photos"><span>Static photos</span></label>
+            </div>
+            <p class="group__title" style="margin-top:20px">Video</p>
+            <div class="choices">
+              <label class="choice"><input type="checkbox" name="activity" value="Track videos car to car"><span>Track videos car to car</span></label>
+              <label class="choice"><input type="checkbox" name="activity" value="In-car video"><span>In-car video</span></label>
+              <label class="choice"><input type="checkbox" name="activity" value="Video stand-up"><span>Video stand-up</span></label>
+              <label class="choice"><input type="checkbox" name="activity" value="Microphone"><span>Microphone</span></label>
+            </div>
+            <p class="group__title" style="margin-top:20px">Other</p>
+            <div class="choices">
+              <label class="choice"><input type="checkbox" name="activity" value="Executive interview"><span>Executive interview</span></label>
+              <label class="choice"><input type="checkbox" name="activity" value="Mixed Reality"><span>Mixed Reality</span></label>
+            </div>
+            <div class="f" data-when="activity:Executive interview" style="margin-top:14px">
+              <textarea id="interview_detail" name="interview_detail" placeholder=" " rows="3"></textarea><label for="interview_detail">Executive interview — details</label>
+            </div>
+            <p class="note" style="margin-top:14px">Our photo and video crew will be at your disposal during the dedicated photo and video session.</p>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend class="group__title">Comments / additional information</legend>
+          <div class="f"><textarea id="comments" name="comments" placeholder=" " rows="4"></textarea><label for="comments">Any additional comments about your participation</label></div>
+        </fieldset>
+      </section>
+
+      <!-- ============ STEP 5 · CONFIRMATION ============ -->
+      <section class="step" data-step="4" data-bg="peak" data-label="Confirmation" aria-labelledby="s5t">
+        <div class="step__head">
+          <h2 class="step__title" id="s5t">Confirmation</h2>
+          <p class="step__intro">Please review your details before confirming.</p>
+        </div>
+        <div class="summary" id="summary"></div>
+
+        <label class="consent"><input type="checkbox" name="privacy" value="accepted" required>
+          <p><b>Privacy policy*</b>I declare I have read the privacy policy. <a href="#privacy" target="_blank" rel="noopener">Complete privacy policy</a></p></label>
+        <label class="consent"><input type="checkbox" name="photo_disclaimer" value="accepted" required>
+          <p><b>Disclaimer photo / video*</b>I declare that I have read and accepted the photo/video disclaimer. <a href="#disclaimer" target="_blank" rel="noopener">Complete photo/video disclaimer</a></p></label>
+        <label class="consent"><input type="checkbox" name="terms" value="accepted" required>
+          <p><b>Terms and conditions*</b>By accessing any part or section of this site, the User agrees to be legally bound by the following terms and conditions. <a href="#terms" target="_blank" rel="noopener">Complete terms and conditions</a></p></label>
+        <span class="err" id="consentErr" role="alert"></span>
+      </section>
+
+      <div class="actions" id="actions">
+        <button type="button" class="btn btn--ghost" id="prevBtn" hidden>← Back</button>
+        <span></span>
+        <button type="button" class="btn" id="nextBtn">Continue <span class="arrow" aria-hidden="true">→</span></button>
+      </div>
+    </form>
+
+    <!-- ============ THANK YOU — REGISTRATION ============ -->
+    <section class="card final" id="doneScreen" hidden tabindex="-1" aria-labelledby="doneT">
+      <h2 class="step__title" id="doneT">Thank you<br><span class="y">for your registration</span></h2>
+      <p class="lead" style="margin-top:22px">Dear <span data-salutation>guest</span>,</p>
+      <p>We are delighted to confirm your attendance at the Urus SE Performante dynamic launch, <span data-location>Seville</span> <span data-wave-range></span>.</p>
+      <p>A confirmation e-mail with the summary of your registration has been sent to <b data-email-echo></b>.</p>
+      <p>We look forward to welcoming you to <span data-location>Seville</span>.</p>
+      <p>Yours sincerely,<br><span style="color:#fff">Lamborghini Event Team</span></p>
+      <div class="concierge" data-concierge></div>
+    </section>
+
+    <!-- ============ THANK YOU — DECLINE ============ -->
+    <section class="card final" id="declineScreen" hidden tabindex="-1" aria-labelledby="decT">
+      <h2 class="step__title" id="decT">Thank you<br><span class="y">for your reply</span></h2>
+      <p class="lead" style="margin-top:22px">Dear <span data-salutation>guest</span>,</p>
+      <p>We regret you won't be able to attend. We hope to meet you next time.</p>
+      <p>Please contact your PR representative or the concierge team if you wish to propose a substitute to attend in your place.</p>
+      <p>Yours sincerely,<br><span style="color:#fff">Lamborghini Event Team</span></p>
+      <div class="concierge" data-concierge></div>
+    </section>
+
+    <img class="mobile-logo" src="assets/img/logo-urus-se-performante.svg" alt="Urus SE Performante" width="741" height="200">
+    <footer class="site-foot">
+      <span>© Automobili Lamborghini S.p.A.</span>
+      <a href="#privacy">Privacy policy</a>
+      <a href="#terms">Terms and conditions</a>
+      <a href="#cookies">Cookies</a>
+    </footer>
+  </main>
+</div>
+
+<datalist id="countries"></datalist>
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
