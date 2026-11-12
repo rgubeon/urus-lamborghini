@@ -257,10 +257,10 @@ body{overflow:hidden}
 .hero__shield{position:fixed;top:var(--edge);right:var(--edge);left:auto;width:clamp(54px,3.8vw,74px);height:auto;z-index:4}
 .hero__logo{display:block;width:clamp(170px,15vw,300px);height:auto;margin:0 auto calc(clamp(24px,5.5vh,64px) * -.35)}
 .stepper{position:relative;top:auto;flex:none}
-.panel > .card{flex:0 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--card-pad);scrollbar-width:thin;scrollbar-color:rgba(242,229,0,.55) transparent}
-.panel > .card::-webkit-scrollbar{width:8px}
-.panel > .card::-webkit-scrollbar-thumb{background:rgba(242,229,0,.45);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
-.panel > .card::-webkit-scrollbar-track{background:transparent}
+.panel .card{flex:0 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--card-pad);scrollbar-width:thin;scrollbar-color:rgba(242,229,0,.55) transparent}
+.panel .card::-webkit-scrollbar{width:8px}
+.panel .card::-webkit-scrollbar-thumb{background:rgba(242,229,0,.45);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+.panel .card::-webkit-scrollbar-track{background:transparent}
 /* Continue / Back always sit after the last field */
 .card .actions{position:static;margin:30px 0 0;padding:0;background:none}
 .site-foot{position:fixed;left:var(--edge-f);right:auto;max-width:var(--col-f);bottom:calc(var(--edge) * .5);z-index:4;font-size:11px}
@@ -280,7 +280,7 @@ body{overflow:hidden}
   .hero__meta{white-space:normal}
   .panel{flex:1 1 auto;align-self:auto;max-height:none;padding:10px 0 12px;gap:10px}
   .progress{position:relative;margin:0;padding:0 2px;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;flex:none}
-  .panel > .card{flex:0 1 auto;--card-pad:18px}
+  .panel .card{flex:0 1 auto;--card-pad:18px}
   .site-foot{position:static;flex:none;gap:12px;justify-content:center}
   .card .actions{flex-direction:row;align-items:center;margin-top:24px}
   .card .actions .btn{width:auto;flex:1}
@@ -291,3 +291,167 @@ body{overflow:hidden}
   .hero__title{max-width:230px}
   .hero__logo{width:104px}
 }
+
+/* ==========================================================================
+   Sections (Registration · Program · Travel & Accommodation · FAQ)
+   ========================================================================== */
+.reg{display:contents}
+.panel .card{flex:0 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--card-pad);scrollbar-width:thin;scrollbar-color:rgba(242,229,0,.55) transparent}
+.panel .card::-webkit-scrollbar{width:8px}
+.panel .card::-webkit-scrollbar-thumb{background:rgba(242,229,0,.45);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+.panel .card::-webkit-scrollbar-track{background:transparent}
+.info .step__title{margin-bottom:26px}
+.info .group{margin-bottom:28px}
+.info h3.group__title{margin:0 0 10px}
+.info__p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+.info .concierge{margin-top:8px}
+
+/* Program timeline */
+.days{list-style:none;margin:0 0 30px;padding:0;display:grid;gap:26px}
+.day{position:relative;padding-left:26px;border-left:1px solid rgba(255,255,255,.14)}
+.day::before{content:"";position:absolute;left:-5px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--yellow)}
+.day__head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:0 0 12px}
+.day__n{font-family:var(--font-cnd);font-size:30px;line-height:1;text-transform:uppercase;letter-spacing:.01em}
+.day__date{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);font-weight:700}
+.day__date:empty{display:none}
+.day__list{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
+.day__list > li{position:relative;padding-left:16px}
+.day__list > li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:1px;background:var(--yellow)}
+.day .note--box{margin:14px 0}
+.points{list-style:none;margin:12px 0 4px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.points li{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--text)}
+.points em{font-style:normal;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--yellow)}
+
+/* Travel facts */
+.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;margin:12px 0 0;font-size:14px}
+.facts dt{color:var(--faint)}
+.facts dd{margin:0;color:var(--text)}
+
+/* FAQ accordion */
+.faq{display:grid;gap:10px;margin:0 0 30px}
+.faq details{border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);background:rgba(0,0,0,.2);transition:border-color .25s}
+.faq details[open]{border-color:rgba(242,229,0,.55)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 18px;font-size:15px;color:var(--text)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:9px;height:9px;border-right:1.6px solid var(--yellow);border-bottom:1.6px solid var(--yellow);transform:rotate(45deg) translate(-2px,-2px);transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.faq summary:focus-visible{outline:2px solid var(--yellow);outline-offset:2px;border-radius:var(--radius)}
+.faq details p{margin:0;padding:0 18px 18px;color:var(--muted);font-size:14px;line-height:1.65}
+
+/* ---------- Section menu (index / dropdown) ---------- */
+.secnav{position:fixed;z-index:20;top:var(--edge);left:var(--edge-f)}
+.secnav__btn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 20px 0 18px;border-radius:999px;background:rgba(10,10,10,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);color:var(--text);font-size:15px;transition:border-color .25s}
+.secnav__btn:hover,.secnav__btn[aria-expanded="true"]{border-color:var(--yellow)}
+.secnav__btn:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+.secnav__icon{width:18px;height:14px;color:var(--yellow);flex:none}
+.secnav__chev{width:12px;height:8px;color:var(--yellow);flex:none;transition:transform .3s var(--ease)}
+.secnav__btn[aria-expanded="true"] .secnav__chev{transform:rotate(180deg)}
+.secnav__label{white-space:nowrap}
+.secnav__menu{list-style:none;margin:10px 0 0;padding:8px;min-width:280px;border-radius:16px;background:rgba(14,14,14,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 50px rgba(0,0,0,.6);animation:stepIn .3s var(--ease) both}
+.secnav__menu a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;color:var(--muted);text-decoration:none;font-size:15px;white-space:nowrap}
+.secnav__menu a::before{content:"";width:6px;height:6px;border-radius:50%;background:transparent;border:1px solid var(--line-strong);flex:none}
+.secnav__menu a:hover,.secnav__menu a:focus-visible{background:rgba(255,255,255,.06);color:var(--text);outline:none}
+.secnav__menu a[aria-current="page"]{color:var(--yellow)}
+.secnav__menu a[aria-current="page"]::before{background:var(--yellow);border-color:var(--yellow)}
+/* reserve room above the form block for the menu (symmetric, so both columns stay centred) */
+@media (min-width:901px){
+  .page{padding-top:max(var(--vpad), calc(var(--edge) + 72px));padding-bottom:max(var(--vpad), calc(var(--edge) + 72px))}
+}
+
+/* ---------- Legal modal ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:max(16px,var(--edge))}
+.modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:fadeIn .3s ease both}
+.modal__box{position:relative;display:flex;flex-direction:column;width:min(820px,100%);max-height:100%;min-height:0;background:#0e0e0e;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);box-shadow:0 30px 80px rgba(0,0,0,.7);animation:stepIn .45s var(--ease) both}
+.modal__head{flex:none;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:var(--card-pad) var(--card-pad) 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.modal__kicker{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+.modal__title{margin:0;font-family:var(--font-cnd);font-weight:400;font-size:clamp(30px,2.6vw,46px);line-height:.95;text-transform:uppercase;text-wrap:balance}
+.modal__close{all:unset;box-sizing:border-box;flex:none;cursor:pointer;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;color:var(--text);transition:border-color .25s,color .25s}
+.modal__close svg{width:14px;height:14px}
+.modal__close:hover,.modal__close:focus-visible{border-color:var(--yellow);color:var(--yellow)}
+.modal__close:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.modal__body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:22px var(--card-pad) var(--card-pad);font-size:14px;line-height:1.7;color:rgba(255,255,255,.78);scrollbar-width:thin;scrollbar-color:rgba(242,229,0,.55) transparent}
+.modal__body:focus-visible{outline:none}
+.modal__body::-webkit-scrollbar{width:8px}
+.modal__body::-webkit-scrollbar-thumb{background:rgba(242,229,0,.45);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+.modal__body h3{margin:26px 0 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);line-height:1.5}
+.modal__body h3:first-child{margin-top:0}
+.modal__body p{margin:0 0 12px;max-width:72ch;overflow-wrap:anywhere}
+.modal__body ul{margin:0 0 14px;padding:0;list-style:none;display:grid;gap:6px;max-width:72ch}
+.modal__body li{position:relative;padding-left:18px}
+.modal__body li::before{content:"";position:absolute;left:0;top:.8em;width:8px;height:1px;background:var(--yellow)}
+.modal__body .tbl{overflow-x:auto;margin:8px 0 0}
+.modal__body table{width:100%;border-collapse:collapse;font-size:13px;min-width:420px}
+.modal__body th{text-align:left;font-weight:700;color:var(--text);padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.2)}
+.modal__body td{padding:12px;color:var(--faint);border-bottom:1px solid rgba(255,255,255,.08)}
+.modal__foot{flex:none;display:flex;justify-content:flex-end;align-items:center;gap:14px;padding:16px var(--card-pad);border-top:1px solid rgba(255,255,255,.08)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* consent links open the document; keep them clearly tappable */
+.consent a{white-space:nowrap}
+
+@media (max-width:900px){
+  .secnav{top:12px;left:16px}
+  .secnav__btn{width:40px;height:40px;padding:0;justify-content:center;gap:0}
+  .secnav__label,.secnav__chev{display:none}
+  .secnav__menu{position:fixed;left:16px;right:16px;min-width:0;margin-top:8px}
+  .info .step__title{margin-bottom:20px}
+  .day__n{font-size:26px}
+  .modal{padding:12px}
+  .modal__foot{flex-direction:column-reverse;align-items:stretch}
+  .modal__foot .btn{width:100%}
+  .consent a{white-space:normal}
+}
+.points li{border-radius:14px}
+@media (max-width:900px){
+  .site-foot{max-width:none;justify-content:center;text-align:center;gap:4px 12px;font-size:11px}
+}
+
+/* ==========================================================================
+   Iconography (line icons, brand yellow) for Program · Travel · FAQ
+   ========================================================================== */
+.ico{width:18px;height:18px;flex:none;color:var(--yellow);display:inline-block;vertical-align:middle}
+.info{animation:none}
+/* Program */
+.day__list > li{display:flex;align-items:flex-start;gap:12px;padding-left:0}
+.day__list > li::before{display:none}
+.day__list > li > .ico{margin-top:1px}
+.day__list > li > div{min-width:0;flex:1}
+.points li{gap:2px 8px;align-items:center}
+.points li .ico{width:16px;height:16px}
+.points em{flex-basis:auto}
+.note--ico{display:flex;gap:12px;align-items:flex-start}
+.note--ico > .ico{margin-top:2px}
+/* Travel */
+.group__title--ico{display:flex;align-items:center;gap:12px}
+.ico-badge{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid rgba(242,229,0,.35);background:rgba(242,229,0,.06)}
+.ico-badge .ico{width:17px;height:17px}
+.facts dt{display:flex;align-items:center;gap:8px}
+.facts dt .ico{width:15px;height:15px}
+/* FAQ */
+.faq summary{justify-content:flex-start}
+.faq__ico{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid rgba(242,229,0,.35);background:rgba(242,229,0,.06)}
+.faq__ico .ico{width:17px;height:17px}
+.faq__q{flex:1;min-width:0}
+.faq details p{padding-left:70px}
+/* Concierge */
+.concierge b{display:flex;align-items:center;gap:8px}
+.concierge b .ico{width:16px;height:16px}
+@media (max-width:900px){
+  .faq details p{padding-left:18px}
+  .faq__ico{width:30px;height:30px}
+  .ico-badge{width:30px;height:30px}
+}
+
+/* FAQ — dynamic states (open state reacts as soon as the toggle starts) */
+.faq details{transition:border-color .35s ease,background-color .35s ease}
+.faq details[open]{border-color:rgba(255,255,255,.14)}
+.faq details[open]:not(.is-closing){border-color:rgba(242,229,0,.55);background:rgba(242,229,0,.035)}
+.faq details[open] summary::after{transform:rotate(45deg) translate(-2px,-2px)}
+.faq details[open]:not(.is-closing) summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.faq__ico{transition:background-color .35s ease,border-color .35s ease}
+.faq__ico .ico{transition:color .35s ease}
+.faq details[open]:not(.is-closing) .faq__ico{background:var(--yellow);border-color:var(--yellow)}
+.faq details[open]:not(.is-closing) .faq__ico .ico{color:#0a0a0a}
+.faq summary{transition:color .25s ease}
+.faq summary:hover .faq__q{color:#fff}
+.faq details:not([open]) summary:hover .faq__ico{border-color:var(--yellow)}

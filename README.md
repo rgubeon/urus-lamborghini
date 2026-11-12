@@ -5,7 +5,7 @@ Static site, no build step.
 | Path | What |
 |---|---|
 | `/` | Prototype: registration web + mailings toggle (no data is sent) |
-| `/landing/` | Production landing. Test with `?wave=E&email=jane@media.com&title=Ms&first_name=Jane&last_name=Doe` (add `&rsvp=no` for the decline screen) |
+| `/landing/` | Production landing. Test with `?wave=E&email=jane@media.com&title=Ms&first_name=Jane&last_name=Doe` (add `&rsvp=no` for the decline screen). Sections and legal docs by hash: `#program`, `#travel`, `#faq`, `#privacy-policy`, `#cookie-policy`, `#terms-of-use` |
 | `/emails/` | Raw HTML e-mails (`01-invitation.html`, `02-registration-confirmed.html`, `03-reply-declined.html`) |
 
 ## Deploy

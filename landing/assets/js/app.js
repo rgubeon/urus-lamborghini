@@ -38,6 +38,7 @@
   const nextBtn = $('#nextBtn');
   let current = 0;
   let maxReached = 0;
+  let currentSection = 'registration';
 
   /* ---------- Dates ---------- */
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -76,7 +77,7 @@
 
   const c = CONFIG.concierge;
   $$('[data-concierge]').forEach(el => {
-    el.innerHTML = `<b>Lamborghini Concierge</b>Hotline: ${c.phone} · ${c.hours}<br>E-mail: <a href="mailto:${c.email}">${c.email}</a>`;
+    el.innerHTML = `<b><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-headset"/></svg>Lamborghini Concierge</b>Hotline: ${c.phone} · ${c.hours}<br>E-mail: <a href="mailto:${c.email}">${c.email}</a>`;
   });
 
   /* ---------- Countries (datalist) ---------- */
@@ -302,7 +303,7 @@
     const s = $(sel); s.hidden = false;
     $$('[data-salutation]', s).forEach(el => (el.textContent = name || 'guest'));
     $$('[data-email-echo]', s).forEach(el => (el.textContent = form.email.value));
-    setBg('peak');
+    if (currentSection === 'registration') setBg('peak');
     s.focus({ preventScroll: true });
     s.scrollTop = 0;
   }
@@ -318,6 +319,188 @@
   } else {
     go(0, { focus: false });
   }
+
+  /* ---------- Program: real dates for Day 1 / 2 / 3 from the guest's wave ---------- */
+  const WEEKDAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  $$('[data-day]').forEach(el => {
+    if (!wave) return;
+    const x = d(wave.from); x.setDate(x.getDate() + Number(el.dataset.day));
+    el.textContent = `${WEEKDAYS[x.getDay()]} ${x.getDate()} ${months[x.getMonth()]}`;
+  });
+
+  /* ---------- Sections: Registration · Program · Travel & Accommodation · FAQ ---------- */
+  const sections = $$('[data-section]');
+  const secBtn = $('#secnavBtn'), secMenu = $('#secnavMenu'), secLabel = $('#secnavLabel');
+  function regBg() {
+    const finalOpen = !$('#doneScreen').hidden || !$('#declineScreen').hidden;
+    return finalOpen ? 'peak' : steps[current].dataset.bg;
+  }
+  /* Crossfade between sections: the box on screen fades out, then the new one fades in */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const OUT_MS = 280, IN_MS = 520, EASE_IN = 'cubic-bezier(.4,0,1,1)', EASE_OUT = 'cubic-bezier(.22,1,.36,1)';
+  let swapToken = 0;
+  const visibleSection = () => sections.find(s => !s.hidden);
+  const fadeTargets = sec => sec.classList.contains('reg')
+    ? [...sec.children].filter(el => !el.hidden && getComputedStyle(el).display !== 'none')
+    : [sec];
+  function showSection(name, { updateHash = true, focus = false, animate = true } = {}) {
+    const target = sections.find(s => s.dataset.section === name);
+    if (!target) return false;
+    const prev = visibleSection();
+    currentSection = name;
+    secLabel.textContent = target.dataset.label;
+    $$('[data-section-link]', secMenu).forEach(a => {
+      if (a.dataset.sectionLink === name) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    setBg(name === 'registration' ? regBg() : target.dataset.bg);
+    if (updateHash && location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+    const token = ++swapToken;
+    const swapIn = () => {
+      if (token !== swapToken) return;
+      sections.forEach(s => (s.hidden = s !== target));
+      if (name !== 'registration') target.scrollTop = 0;
+      if (animate && !reduceMotion && prev !== target) {
+        fadeTargets(target).forEach(el => el.animate(
+          [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }],
+          { duration: IN_MS, easing: EASE_OUT }));
+      }
+      if (focus) {
+        const h = target.querySelector('.step__title') || target.querySelector('h2');
+        if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+      }
+    };
+    if (!prev || prev === target || !animate || reduceMotion) { swapIn(); return true; }
+    const outs = fadeTargets(prev);
+    Promise.all(outs.map(el => el.animate(
+      [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-8px)' }],
+      { duration: OUT_MS, easing: EASE_IN, fill: 'forwards' }).finished.catch(() => {})))
+      .then(() => {
+        swapIn();
+        outs.forEach(el => el.getAnimations().forEach(a => { if (a.effect && a.effect.getTiming().fill === 'forwards') a.cancel(); }));
+      });
+    return true;
+  }
+  function setMenu(open) {
+    secMenu.hidden = !open; secBtn.setAttribute('aria-expanded', String(open));
+    if (open) (secMenu.querySelector('[aria-current="page"]') || secMenu.querySelector('a')).focus();
+  }
+  secBtn.addEventListener('click', () => setMenu(secMenu.hidden));
+  secMenu.addEventListener('click', e => {
+    const a = e.target.closest('[data-section-link]'); if (!a) return;
+    e.preventDefault(); setMenu(false); showSection(a.dataset.sectionLink, { focus: true });
+  });
+  secMenu.addEventListener('keydown', e => {
+    const items = $$('a', secMenu); const i = items.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+    if (e.key === 'Escape') { setMenu(false); secBtn.focus(); }
+  });
+  document.addEventListener('click', e => { if (!secMenu.hidden && !e.target.closest('.secnav')) setMenu(false); });
+
+  /* ---------- FAQ: smooth, exclusive accordion ---------- */
+  const faqItems = $$('.faq details');
+  const OPEN_MS = 460, CLOSE_MS = 340;
+  function animateFaq(d, open) {
+    const summary = d.querySelector('summary'), body = d.querySelector('p');
+    d._anim?.cancel(); d._fade?.cancel();
+    const start = d.getBoundingClientRect().height;
+    const frame = d.offsetHeight - d.clientHeight;            // borders
+    if (open) d.open = true;
+    const end = open ? (d.style.height = 'auto', d.getBoundingClientRect().height) : summary.getBoundingClientRect().height + frame;
+    d.style.height = ''; d.style.overflow = 'hidden';
+    d.classList.toggle('is-opening', open); d.classList.toggle('is-closing', !open);
+    d._anim = d.animate([{ height: start + 'px' }, { height: end + 'px' }],
+      { duration: open ? OPEN_MS : CLOSE_MS, easing: open ? 'cubic-bezier(.22,1,.36,1)' : 'cubic-bezier(.4,0,.2,1)' });
+    d._fade = body.animate(open
+      ? [{ opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'none' }]
+      : [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-4px)' }],
+      { duration: open ? OPEN_MS : CLOSE_MS * .7, easing: 'ease', fill: 'both' });
+    d._anim.onfinish = () => {
+      if (!open) d.open = false;
+      d.style.overflow = ''; d.classList.remove('is-opening', 'is-closing');
+      d._fade?.cancel(); d._anim = d._fade = null;
+      if (open) {                                                 // keep the answer in view inside the scrolling card
+        const card = d.closest('.card'), r = d.getBoundingClientRect(), c = card.getBoundingClientRect();
+        if (r.bottom > c.bottom - 16) card.scrollBy({ top: Math.min(r.bottom - c.bottom + 24, r.top - c.top - 16), behavior: 'smooth' });
+      }
+    };
+    d._anim.oncancel = () => { d.style.overflow = ''; };
+  }
+  faqItems.forEach(d => {
+    d.querySelector('summary').addEventListener('click', e => {
+      e.preventDefault();
+      const willOpen = !d.open || d.classList.contains('is-closing');
+      if (reduceMotion) { faqItems.forEach(o => { if (o !== d) o.open = false; }); d.open = willOpen; return; }
+      if (willOpen) faqItems.forEach(o => { if (o !== d && o.open && !o.classList.contains('is-closing')) animateFaq(o, false); });
+      animateFaq(d, willOpen);
+    });
+  });
+
+  /* ---------- Legal documents (client texts) in a modal ---------- */
+  const LEGAL = window.URUS_LEGAL || {};
+  const modal = $('#legalModal'), mBody = $('#legalBody'), mFoot = $('#legalFoot');
+  let lastFocus = null, consentFor = null;
+  function renderBlocks(blocks) {
+    let html = '', list = '';
+    const flush = () => { if (list) { html += `<ul>${list}</ul>`; list = ''; } };
+    blocks.forEach(([kind, t]) => {
+      if (kind === 'li') { list += `<li>${esc(t)}</li>`; return; }
+      flush();
+      if (kind === 'h') html += `<h3>${esc(t)}</h3>`;
+      else if (kind === 'table') html += `<div class="tbl"><table><thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody><tr><td colspan="${t.head.length}">${esc(t.empty)}</td></tr></tbody></table></div>`;
+      else html += `<p>${esc(t).replace(/([\w.+-]+@[\w-]+\.[\w.]+[a-z])/gi, '<a href="mailto:$1">$1</a>')}</p>`;
+    });
+    flush(); return html;
+  }
+  function openLegal(id, consentName = null) {
+    const doc = LEGAL[id]; if (!doc) return false;
+    lastFocus = document.activeElement; consentFor = consentName;
+    $('#legalKicker').textContent = doc.kicker;
+    $('#legalTitle').textContent = doc.title;
+    mBody.innerHTML = renderBlocks(doc.blocks); mBody.scrollTop = 0;
+    mFoot.hidden = !consentName;
+    modal.hidden = false;
+    $('.modal__close', modal).focus();
+    return true;
+  }
+  function closeLegal() {
+    if (modal.hidden) return;
+    modal.hidden = true;
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
+  }
+  modal.addEventListener('click', e => { if (e.target.closest('[data-modal-close]')) closeLegal(); });
+  $('#legalAccept').addEventListener('click', () => {
+    const box = consentFor && form.querySelector(`input[name="${consentFor}"]`);
+    if (box) { box.checked = true; box.dispatchEvent(new Event('change', { bubbles: true })); }
+    if ($$('.consent input', form).every(x => x.checked)) $('#consentErr').textContent = '';
+    box?.closest('.consent')?.classList.remove('is-invalid');
+    closeLegal();
+  });
+  modal.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { e.preventDefault(); closeLegal(); return; }
+    if (e.key !== 'Tab') return;
+    const f = $$('button:not([hidden]), a[href], [tabindex="0"]', modal).filter(el => el.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-legal]'); if (!a) return;
+    e.preventDefault(); e.stopPropagation();
+    openLegal(a.dataset.legal, a.dataset.consent || null);
+  }, true);
+
+  /* ---------- Deep links: #program, #faq, #privacy-policy … ---------- */
+  function route(animate) {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (!h) return;
+    if (LEGAL[h]) { openLegal(h); return; }
+    showSection(h, { updateHash: false, animate });
+  }
+  window.addEventListener('hashchange', () => route(true));
+  showSection(currentSection, { updateHash: false, animate: false });
+  route(false);
 
   /* ---------- Intro motion ---------- */
   requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('is-ready')));

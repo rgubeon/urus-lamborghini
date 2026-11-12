@@ -269,10 +269,10 @@ body{overflow:hidden}
 .hero__shield{position:fixed;top:var(--edge);right:var(--edge);left:auto;width:clamp(54px,3.8vw,74px);height:auto;z-index:4}
 .hero__logo{display:block;width:clamp(170px,15vw,300px);height:auto;margin:0 auto calc(clamp(24px,5.5vh,64px) * -.35)}
 .stepper{position:relative;top:auto;flex:none}
-.panel > .card{flex:0 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--card-pad);scrollbar-width:thin;scrollbar-color:rgba(242,229,0,.55) transparent}
-.panel > .card::-webkit-scrollbar{width:8px}
-.panel > .card::-webkit-scrollbar-thumb{background:rgba(242,229,0,.45);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
-.panel > .card::-webkit-scrollbar-track{background:transparent}
+.panel .card{flex:0 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--card-pad);scrollbar-width:thin;scrollbar-color:rgba(242,229,0,.55) transparent}
+.panel .card::-webkit-scrollbar{width:8px}
+.panel .card::-webkit-scrollbar-thumb{background:rgba(242,229,0,.45);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+.panel .card::-webkit-scrollbar-track{background:transparent}
 /* Continue / Back always sit after the last field */
 .card .actions{position:static;margin:30px 0 0;padding:0;background:none}
 .site-foot{position:fixed;left:var(--edge-f);right:auto;max-width:var(--col-f);bottom:calc(var(--edge) * .5);z-index:4;font-size:11px}
@@ -292,7 +292,7 @@ body{overflow:hidden}
   .hero__meta{white-space:normal}
   .panel{flex:1 1 auto;align-self:auto;max-height:none;padding:10px 0 12px;gap:10px}
   .progress{position:relative;margin:0;padding:0 2px;background:none;backdrop-filter:none;-webkit-backdrop-filter:none;flex:none}
-  .panel > .card{flex:0 1 auto;--card-pad:18px}
+  .panel .card{flex:0 1 auto;--card-pad:18px}
   .site-foot{position:static;flex:none;gap:12px;justify-content:center}
   .card .actions{flex-direction:row;align-items:center;margin-top:24px}
   .card .actions .btn{width:auto;flex:1}
@@ -303,6 +303,170 @@ body{overflow:hidden}
   .hero__title{max-width:230px}
   .hero__logo{width:104px}
 }
+
+/* ==========================================================================
+   Sections (Registration · Program · Travel & Accommodation · FAQ)
+   ========================================================================== */
+.reg{display:contents}
+.panel .card{flex:0 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--card-pad);scrollbar-width:thin;scrollbar-color:rgba(242,229,0,.55) transparent}
+.panel .card::-webkit-scrollbar{width:8px}
+.panel .card::-webkit-scrollbar-thumb{background:rgba(242,229,0,.45);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+.panel .card::-webkit-scrollbar-track{background:transparent}
+.info .step__title{margin-bottom:26px}
+.info .group{margin-bottom:28px}
+.info h3.group__title{margin:0 0 10px}
+.info__p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
+.info .concierge{margin-top:8px}
+
+/* Program timeline */
+.days{list-style:none;margin:0 0 30px;padding:0;display:grid;gap:26px}
+.day{position:relative;padding-left:26px;border-left:1px solid rgba(255,255,255,.14)}
+.day::before{content:"";position:absolute;left:-5px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--yellow)}
+.day__head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:0 0 12px}
+.day__n{font-family:var(--font-cnd);font-size:30px;line-height:1;text-transform:uppercase;letter-spacing:.01em}
+.day__date{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);font-weight:700}
+.day__date:empty{display:none}
+.day__list{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
+.day__list > li{position:relative;padding-left:16px}
+.day__list > li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:1px;background:var(--yellow)}
+.day .note--box{margin:14px 0}
+.points{list-style:none;margin:12px 0 4px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.points li{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:2px 8px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--text)}
+.points em{font-style:normal;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--yellow)}
+
+/* Travel facts */
+.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;margin:12px 0 0;font-size:14px}
+.facts dt{color:var(--faint)}
+.facts dd{margin:0;color:var(--text)}
+
+/* FAQ accordion */
+.faq{display:grid;gap:10px;margin:0 0 30px}
+.faq details{border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);background:rgba(0,0,0,.2);transition:border-color .25s}
+.faq details[open]{border-color:rgba(242,229,0,.55)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 18px;font-size:15px;color:var(--text)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:9px;height:9px;border-right:1.6px solid var(--yellow);border-bottom:1.6px solid var(--yellow);transform:rotate(45deg) translate(-2px,-2px);transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.faq summary:focus-visible{outline:2px solid var(--yellow);outline-offset:2px;border-radius:var(--radius)}
+.faq details p{margin:0;padding:0 18px 18px;color:var(--muted);font-size:14px;line-height:1.65}
+
+/* ---------- Section menu (index / dropdown) ---------- */
+.secnav{position:fixed;z-index:20;top:var(--edge);left:var(--edge-f)}
+.secnav__btn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 20px 0 18px;border-radius:999px;background:rgba(10,10,10,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);color:var(--text);font-size:15px;transition:border-color .25s}
+.secnav__btn:hover,.secnav__btn[aria-expanded="true"]{border-color:var(--yellow)}
+.secnav__btn:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+.secnav__icon{width:18px;height:14px;color:var(--yellow);flex:none}
+.secnav__chev{width:12px;height:8px;color:var(--yellow);flex:none;transition:transform .3s var(--ease)}
+.secnav__btn[aria-expanded="true"] .secnav__chev{transform:rotate(180deg)}
+.secnav__label{white-space:nowrap}
+.secnav__menu{list-style:none;margin:10px 0 0;padding:8px;min-width:280px;border-radius:16px;background:rgba(14,14,14,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 50px rgba(0,0,0,.6);animation:stepIn .3s var(--ease) both}
+.secnav__menu a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;color:var(--muted);text-decoration:none;font-size:15px;white-space:nowrap}
+.secnav__menu a::before{content:"";width:6px;height:6px;border-radius:50%;background:transparent;border:1px solid var(--line-strong);flex:none}
+.secnav__menu a:hover,.secnav__menu a:focus-visible{background:rgba(255,255,255,.06);color:var(--text);outline:none}
+.secnav__menu a[aria-current="page"]{color:var(--yellow)}
+.secnav__menu a[aria-current="page"]::before{background:var(--yellow);border-color:var(--yellow)}
+/* reserve room above the form block for the menu (symmetric, so both columns stay centred) */
+@media (min-width:901px){
+  .page{padding-top:max(var(--vpad), calc(var(--edge) + 72px));padding-bottom:max(var(--vpad), calc(var(--edge) + 72px))}
+}
+
+/* ---------- Legal modal ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:max(16px,var(--edge))}
+.modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:fadeIn .3s ease both}
+.modal__box{position:relative;display:flex;flex-direction:column;width:min(820px,100%);max-height:100%;min-height:0;background:#0e0e0e;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);box-shadow:0 30px 80px rgba(0,0,0,.7);animation:stepIn .45s var(--ease) both}
+.modal__head{flex:none;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:var(--card-pad) var(--card-pad) 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.modal__kicker{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+.modal__title{margin:0;font-family:var(--font-cnd);font-weight:400;font-size:clamp(30px,2.6vw,46px);line-height:.95;text-transform:uppercase;text-wrap:balance}
+.modal__close{all:unset;box-sizing:border-box;flex:none;cursor:pointer;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;color:var(--text);transition:border-color .25s,color .25s}
+.modal__close svg{width:14px;height:14px}
+.modal__close:hover,.modal__close:focus-visible{border-color:var(--yellow);color:var(--yellow)}
+.modal__close:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.modal__body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:22px var(--card-pad) var(--card-pad);font-size:14px;line-height:1.7;color:rgba(255,255,255,.78);scrollbar-width:thin;scrollbar-color:rgba(242,229,0,.55) transparent}
+.modal__body:focus-visible{outline:none}
+.modal__body::-webkit-scrollbar{width:8px}
+.modal__body::-webkit-scrollbar-thumb{background:rgba(242,229,0,.45);border-radius:8px;border:2px solid transparent;background-clip:padding-box}
+.modal__body h3{margin:26px 0 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);line-height:1.5}
+.modal__body h3:first-child{margin-top:0}
+.modal__body p{margin:0 0 12px;max-width:72ch;overflow-wrap:anywhere}
+.modal__body ul{margin:0 0 14px;padding:0;list-style:none;display:grid;gap:6px;max-width:72ch}
+.modal__body li{position:relative;padding-left:18px}
+.modal__body li::before{content:"";position:absolute;left:0;top:.8em;width:8px;height:1px;background:var(--yellow)}
+.modal__body .tbl{overflow-x:auto;margin:8px 0 0}
+.modal__body table{width:100%;border-collapse:collapse;font-size:13px;min-width:420px}
+.modal__body th{text-align:left;font-weight:700;color:var(--text);padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.2)}
+.modal__body td{padding:12px;color:var(--faint);border-bottom:1px solid rgba(255,255,255,.08)}
+.modal__foot{flex:none;display:flex;justify-content:flex-end;align-items:center;gap:14px;padding:16px var(--card-pad);border-top:1px solid rgba(255,255,255,.08)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* consent links open the document; keep them clearly tappable */
+.consent a{white-space:nowrap}
+
+@media (max-width:900px){
+  .secnav{top:12px;left:16px}
+  .secnav__btn{width:40px;height:40px;padding:0;justify-content:center;gap:0}
+  .secnav__label,.secnav__chev{display:none}
+  .secnav__menu{position:fixed;left:16px;right:16px;min-width:0;margin-top:8px}
+  .info .step__title{margin-bottom:20px}
+  .day__n{font-size:26px}
+  .modal{padding:12px}
+  .modal__foot{flex-direction:column-reverse;align-items:stretch}
+  .modal__foot .btn{width:100%}
+  .consent a{white-space:normal}
+}
+.points li{border-radius:14px}
+@media (max-width:900px){
+  .site-foot{max-width:none;justify-content:center;text-align:center;gap:4px 12px;font-size:11px}
+}
+
+/* ==========================================================================
+   Iconography (line icons, brand yellow) for Program · Travel · FAQ
+   ========================================================================== */
+.ico{width:18px;height:18px;flex:none;color:var(--yellow);display:inline-block;vertical-align:middle}
+.info{animation:none}
+/* Program */
+.day__list > li{display:flex;align-items:flex-start;gap:12px;padding-left:0}
+.day__list > li::before{display:none}
+.day__list > li > .ico{margin-top:1px}
+.day__list > li > div{min-width:0;flex:1}
+.points li{gap:2px 8px;align-items:center}
+.points li .ico{width:16px;height:16px}
+.points em{flex-basis:auto}
+.note--ico{display:flex;gap:12px;align-items:flex-start}
+.note--ico > .ico{margin-top:2px}
+/* Travel */
+.group__title--ico{display:flex;align-items:center;gap:12px}
+.ico-badge{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid rgba(242,229,0,.35);background:rgba(242,229,0,.06)}
+.ico-badge .ico{width:17px;height:17px}
+.facts dt{display:flex;align-items:center;gap:8px}
+.facts dt .ico{width:15px;height:15px}
+/* FAQ */
+.faq summary{justify-content:flex-start}
+.faq__ico{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid rgba(242,229,0,.35);background:rgba(242,229,0,.06)}
+.faq__ico .ico{width:17px;height:17px}
+.faq__q{flex:1;min-width:0}
+.faq details p{padding-left:70px}
+/* Concierge */
+.concierge b{display:flex;align-items:center;gap:8px}
+.concierge b .ico{width:16px;height:16px}
+@media (max-width:900px){
+  .faq details p{padding-left:18px}
+  .faq__ico{width:30px;height:30px}
+  .ico-badge{width:30px;height:30px}
+}
+
+/* FAQ — dynamic states (open state reacts as soon as the toggle starts) */
+.faq details{transition:border-color .35s ease,background-color .35s ease}
+.faq details[open]{border-color:rgba(255,255,255,.14)}
+.faq details[open]:not(.is-closing){border-color:rgba(242,229,0,.55);background:rgba(242,229,0,.035)}
+.faq details[open] summary::after{transform:rotate(45deg) translate(-2px,-2px)}
+.faq details[open]:not(.is-closing) summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.faq__ico{transition:background-color .35s ease,border-color .35s ease}
+.faq__ico .ico{transition:color .35s ease}
+.faq details[open]:not(.is-closing) .faq__ico{background:var(--yellow);border-color:var(--yellow)}
+.faq details[open]:not(.is-closing) .faq__ico .ico{color:#0a0a0a}
+.faq summary{transition:color .25s ease}
+.faq summary:hover .faq__q{color:#fff}
+.faq details:not([open]) summary:hover .faq__ico{border-color:var(--yellow)}
 
 /* ===== Prototype shell: view toggle + mailings viewer ===== */
 
@@ -421,6 +585,21 @@ body{overflow:hidden}
   <div class="bg__scan"></div>
 </div>
 
+<svg class="sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><defs><symbol id="i-hotel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16"/><path d="M15 10h4a1 1 0 0 1 1 1v10"/><path d="M2 21h20"/><path d="M8 8h3M8 12h3M8 16h3"/></symbol><symbol id="i-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5v15"/><path d="M3 15h18v5"/><path d="M21 15v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11.5" r="2"/></symbol><symbol id="i-dinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v5a2 2 0 0 0 4 0V3"/><path d="M8 10v11"/><path d="M18 21V3c-2.2 1.4-3.5 4-3.5 7.5V14H18"/></symbol><symbol id="i-shuttle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16V7a1 1 0 0 1 1-1h12l5 5v5"/><path d="M2 11h18"/><path d="M8 6v5"/><path d="M2 16h2.5M9.5 16h5M19.5 16H22"/><circle cx="7" cy="16.5" r="2.2"/><circle cx="17" cy="16.5" r="2.2"/></symbol><symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4.5L17 13H5"/></symbol><symbol id="i-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M9 16l4-4-4-4"/><path d="M13 12H3"/></symbol><symbol id="i-clipboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="M9 10h6M9 14h6M9 18h3"/></symbol><symbol id="i-wheel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M3.3 10.6l6.3 1M20.7 10.6l-6.3 1M12 14.5V21"/></symbol><symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.5 17.5a1.8 1.8 0 0 0 3 3l5.8-5.8a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></symbol><symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21M8.5 21h7"/></symbol><symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5a2 2 0 0 1 2-2h2.2L9 4h6l1.8 2.5H19a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="3.5"/></symbol><symbol id="i-vr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-4.2l-1.8-2.4h-2L9.2 17H5a2 2 0 0 1-2-2z"/><circle cx="8" cy="12" r="1.6"/><circle cx="16" cy="12" r="1.6"/></symbol><symbol id="i-plane" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 3.8a1.5 1.5 0 0 1 3 0V9l7.5 4.6v2l-7.5-2.2v4.3l2 1.6V21L12 20l-3.5 1v-1.7l2-1.6v-4.3L3 15.6v-2L10.5 9z"/></symbol><symbol id="i-passport" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 16.5h6"/></symbol><symbol id="i-idcard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><circle cx="8" cy="10.5" r="2"/><path d="M5 16c.6-1.5 1.7-2.3 3-2.3s2.4.8 3 2.3"/><path d="M14 10h5M14 14h3.5"/></symbol><symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol><symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 3.5h3.3l1.7 4.3-2.2 1.4a11 11 0 0 0 6.5 6.5l1.4-2.2 4.3 1.7v3.3a2 2 0 0 1-2.1 2A16.5 16.5 0 0 1 3.5 5.6a2 2 0 0 1 2-2.1z"/></symbol><symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2"/></symbol><symbol id="i-hanger" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5.2a2 2 0 1 1 2 2V9l8.4 5.3a1 1 0 0 1-.5 1.9H4.1a1 1 0 0 1-.5-1.9L12 9"/></symbol><symbol id="i-helmet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15.5a9 9 0 0 1 17.9-1.5V17a2 2 0 0 1-2 2H9.5L7.5 15.5z"/><path d="M12.5 10h8.2"/></symbol><symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 10.5 11 5 20 4.5 20 13 14.5 19 6 19z"/><path d="M5 19l8-8"/></symbol><symbol id="i-headset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19a3 3 0 0 1-3 3h-3"/></symbol><symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><path d="M12 7.6v.2"/></symbol></defs></svg>
+<nav class="secnav" aria-label="Sections">
+  <button type="button" class="secnav__btn" id="secnavBtn" aria-haspopup="true" aria-expanded="false" aria-controls="secnavMenu">
+    <svg class="secnav__icon" viewBox="0 0 18 14" aria-hidden="true"><path d="M0 1h18M0 7h18M0 13h12" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+    <span class="secnav__label" id="secnavLabel">Registration</span>
+    <svg class="secnav__chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+  </button>
+  <ul class="secnav__menu" id="secnavMenu" hidden>
+    <li><a href="#registration" data-section-link="registration">Registration</a></li>
+    <li><a href="#program" data-section-link="program">Program</a></li>
+    <li><a href="#travel" data-section-link="travel">Travel &amp; Accommodation</a></li>
+    <li><a href="#faq" data-section-link="faq">FAQ</a></li>
+  </ul>
+</nav>
+
 <div class="page">
 
   <!-- ===================== HERO ===================== -->
@@ -442,6 +621,7 @@ body{overflow:hidden}
   <!-- ===================== PANEL ===================== -->
   <main class="panel" id="main">
 
+    <div class="reg" data-section="registration" data-label="Registration">
     <ol class="stepper fade-up" style="--d:.4s" aria-label="Registration steps" id="stepper">
       <li class="is-current"><button type="button" data-goto="0">1. Personal info</button></li>
       <li><button type="button" data-goto="1">2. Documents</button></li>
@@ -630,7 +810,6 @@ body{overflow:hidden}
             <p class="group__title" style="margin-top:20px">Other</p>
             <div class="choices">
               <label class="choice"><input type="checkbox" name="activity" value="Executive interview"><span>Executive interview</span></label>
-              <label class="choice"><input type="checkbox" name="activity" value="Mixed Reality"><span>Mixed Reality</span></label>
             </div>
             <div class="f" data-when="activity:Executive interview" style="margin-top:14px">
               <textarea id="interview_detail" name="interview_detail" placeholder=" " rows="3"></textarea><label for="interview_detail">Executive interview — details</label>
@@ -654,11 +833,11 @@ body{overflow:hidden}
         <div class="summary" id="summary"></div>
 
         <label class="consent"><input type="checkbox" name="privacy" value="accepted" required>
-          <p><b>Privacy policy*</b>I declare I have read the privacy policy. <a href="#privacy" target="_blank" rel="noopener">Complete privacy policy</a></p></label>
+          <p><b>Purposes of processing – Privacy policy*</b>I declare I have read the privacy policy on the purposes of processing of my personal data. <a href="#purposes-of-processing" data-legal="purposes-of-processing" data-consent="privacy">Read the privacy policy</a></p></label>
         <label class="consent"><input type="checkbox" name="photo_disclaimer" value="accepted" required>
-          <p><b>Disclaimer photo / video*</b>I declare that I have read and accepted the photo/video disclaimer. <a href="#disclaimer" target="_blank" rel="noopener">Complete photo/video disclaimer</a></p></label>
+          <p><b>Photo-video disclaimer*</b>I declare that I have read and accepted the photo/video disclaimer. <a href="#photo-video-disclaimer" data-legal="photo-video-disclaimer" data-consent="photo_disclaimer">Read the photo-video disclaimer</a></p></label>
         <label class="consent"><input type="checkbox" name="terms" value="accepted" required>
-          <p><b>Terms and conditions*</b>By accessing any part or section of this site, the User agrees to be legally bound by the following terms and conditions. <a href="#terms" target="_blank" rel="noopener">Complete terms and conditions</a></p></label>
+          <p><b>Terms and conditions*</b>By accessing any part or section of this site, the User agrees to be legally bound by the following terms and conditions. <a href="#terms-of-use" data-legal="terms-of-use" data-consent="terms">Read the terms and conditions</a></p></label>
         <span class="err" id="consentErr" role="alert"></span>
       </section>
 
@@ -689,14 +868,127 @@ body{overflow:hidden}
       <p>Yours sincerely,<br><span style="color:#fff">Lamborghini Event Team</span></p>
       <div class="concierge" data-concierge></div><div class="proto-actions"><small>Prototype</small><button type="button" class="proto-link" data-proto="mail-decline">View reply e-mail</button><button type="button" class="proto-link" data-proto="restart">Back to registration</button></div>
     </section>
+    </div>
+
+    <!-- ============ PROGRAM ============ -->
+    <section class="card info" data-section="program" data-label="Program" data-bg="arcs" hidden aria-labelledby="progT">
+      <h2 class="step__title" id="progT">Event program <span class="y">overview</span></h2>
+      <ol class="days">
+        <li class="day">
+          <p class="day__head"><span class="day__n">Day 1</span><span class="day__date" data-day="0"></span></p>
+          <ul class="day__list">
+            <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-hotel"/></svg><span>Arrival at the hotel</span></li>
+            <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-dinner"/></svg><span>Off-site evening dinner</span></li>
+          </ul>
+        </li>
+        <li class="day">
+          <p class="day__head"><span class="day__n">Day 2</span><span class="day__date" data-day="1"></span></p>
+          <ul class="day__list">
+            <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-shuttle"/></svg><span>Transfer to Sevilla Circuit</span></li>
+            <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-flag"/></svg><div><span>At the track you will have the following program points:</span>
+              <ul class="points">
+                <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-enter"/></svg>Welcome</li>
+                <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard"/></svg>Drivers' briefing</li>
+                <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wheel"/></svg>Track drive</li>
+                <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wrench"/></svg>Workshops</li>
+                <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-mic"/></svg>Interviews <em>To be agreed with the PR team</em></li>
+                <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-camera"/></svg>Photo and video session <em>To be agreed with the PR team</em></li>
+                <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-vr"/></svg>Mixed reality</li>
+              </ul></div>
+            </li>
+          </ul>
+          <p class="note note--box note--ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-info"/></svg><span>Please note that it won't be possible to assign a specific car to each participant because of the rotation on track. Our staff will do their best to accommodate specific color requests, but it's not possible to install personal equipment on a car that will be in use all day.</span></p>
+          <ul class="day__list">
+            <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-dinner"/></svg><span>Lunch at the Sevilla Circuit</span></li>
+            <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-dinner"/></svg><span>Dinner at the hotel</span></li>
+          </ul>
+        </li>
+        <li class="day">
+          <p class="day__head"><span class="day__n">Day 3</span><span class="day__date" data-day="2"></span></p>
+          <ul class="day__list">
+            <li><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plane"/></svg><span>Departure</span></li>
+          </ul>
+          <p class="note note--box note--ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-info"/></svg><span>Possible departure late on day two, only on personal request and depending on flights availability. In this case, please note that you might miss a part of the program.</span></p>
+        </li>
+      </ol>
+      <div class="concierge" data-concierge></div>
+    </section>
+
+    <!-- ============ TRAVEL & ACCOMMODATION ============ -->
+    <section class="card info" data-section="travel" data-label="Travel &amp; Accommodation" data-bg="curtain" hidden aria-labelledby="travT">
+      <h2 class="step__title" id="travT">Travel &amp; <span class="y">accommodation</span></h2>
+      <div class="group">
+        <h3 class="group__title group__title--ico"><span class="ico-badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-shuttle"/></svg></span>Ground transportation</h3>
+        <p class="info__p">Our team will welcome you to the airport and guide you to our dedicated event shuttles.</p>
+      </div>
+      <div class="group">
+        <h3 class="group__title group__title--ico"><span class="ico-badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bed"/></svg></span>Accommodation</h3>
+        <p class="info__p">A room has been reserved for you at: <a href="https://www.marriott.com/en-us/hotels/svqlc-hotel-alfonso-xiii-a-luxury-collection-hotel-seville/overview/" target="_blank" rel="noopener">Hotel Alfonso XIII</a></p>
+        <dl class="facts">
+          <dt><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg>Address</dt><dd>Calle San Fernando 2, Seville</dd>
+          <dt><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>Tel</dt><dd>+34 954-917000</dd>
+        </dl>
+      </div>
+      <div class="group">
+        <h3 class="group__title group__title--ico"><span class="ico-badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-passport"/></svg></span>Visa</h3>
+        <p class="note note--box">Citizens from non-EU countries may enter Spain with a passport valid for at least three months after the planned date of departure from the Schengen Area. If you need a visa to enter Spain, please contact your local Spanish embassy. You can find important information on the entry requirements for Spain <a href="https://www.spain.info/en/travel-tips/visa-passport/" target="_blank" rel="noopener">here</a>. Please note that applying for a visa is an individual process and we cannot apply on your behalf. Let us know as soon as possible if you need a visa for your trip to Spain, our concierge team will be pleased to support you providing an invitation letter when needed.<br><br><strong>Important:</strong> please remember to verify that the expiration date of your passport is in at least six months' time.</p>
+      </div>
+      <div class="group">
+        <h3 class="group__title group__title--ico"><span class="ico-badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-idcard"/></svg></span>International driving license</h3>
+        <p class="info__p">In order to attend all event activities, please ensure you hold a valid international driving license that permits driving in Seville Circuit.</p>
+      </div>
+      <div class="concierge" data-concierge></div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="card info" data-section="faq" data-label="FAQ" data-bg="diagonal" hidden aria-labelledby="faqT">
+      <h2 class="step__title" id="faqT">FAQ</h2>
+      <div class="faq">
+        <details><summary><span class="faq__ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plane"/></svg></span><span class="faq__q">Which commercial airport is nearest to the venue?</span></summary>
+          <p>Seville Airport (SVQ – Aeropuerto de Sevilla-San Pablo) is the main international airport serving the area and is located approximately 12 km from your hotel.</p></details>
+        <details><summary><span class="faq__ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sun"/></svg></span><span class="faq__q">What is the average temperature in Seville between late February and early March?</span></summary>
+          <p>Seville enjoys mild and pleasant spring-like weather during late February and early March, with average daytime temperatures around 19°C and nighttime temperatures around 8°C. The city typically experiences plenty of sunshine, offering comfortable conditions for outdoor activities.</p></details>
+        <details><summary><span class="faq__ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg></span><span class="faq__q">Where is the Seville Circuit located?</span></summary>
+          <p>The Seville Circuit, officially known as Circuito de Sevilla, is located in Carmona, approximately 25 km east of Seville city centre.</p></details>
+        <details><summary><span class="faq__ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg></span><span class="faq__q">How long is the transfer from the hotel to the Circuito de Sevilla?</span></summary>
+          <p>The transfer from Hotel to the Circuito de Sevilla takes approximately 25–30 minutes via our dedicated event shuttles, depending on traffic conditions.</p></details>
+        <details><summary><span class="faq__ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-hanger"/></svg></span><span class="faq__q">What is the dress code for the event?</span></summary>
+          <p>Smart casual attire is recommended for dinners and evening events. For the driving sessions at the Circuito de Sevilla, comfortable clothing and flat shoes.</p></details>
+        <details><summary><span class="faq__ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-helmet"/></svg></span><span class="faq__q">Are helmets and racing gear provided at the circuit?</span></summary>
+          <p>Yes, all necessary safety equipment, including helmets and balaclavas, will be provided on-site by our team at the circuit.</p></details>
+        <details><summary><span class="faq__ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-leaf"/></svg></span><span class="faq__q">Will dietary restrictions and allergies be accommodated?</span></summary>
+          <p>Yes, all meals are curated to accommodate specific dietary requirements. Please make sure to indicate any allergies, intolerances, or preferences during the registration process so our catering team can prepare accordingly.</p></details>
+      </div>
+      <div class="concierge" data-concierge></div>
+    </section>
 
     <footer class="site-foot">
       <span>© Automobili Lamborghini S.p.A.</span>
-      <a href="#privacy">Privacy policy</a>
-      <a href="#terms">Terms and conditions</a>
-      <a href="#cookies">Cookies</a>
+      <a href="#cookie-policy" data-legal="cookie-policy">Cookie Policy</a>
+      <a href="#privacy-policy" data-legal="privacy-policy">Privacy Policy</a>
+      <a href="#terms-of-use" data-legal="terms-of-use">Terms of Use</a>
     </footer>
   </main>
+</div>
+
+<div class="modal" id="legalModal" hidden>
+  <div class="modal__backdrop" data-modal-close></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+    <header class="modal__head">
+      <div>
+        <p class="modal__kicker" id="legalKicker"></p>
+        <h2 class="modal__title" id="legalTitle"></h2>
+      </div>
+      <button type="button" class="modal__close" data-modal-close aria-label="Close">
+        <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+    </header>
+    <div class="modal__body" id="legalBody" tabindex="0"></div>
+    <footer class="modal__foot" id="legalFoot" hidden>
+      <button type="button" class="btn btn--ghost" data-modal-close>Close</button>
+      <button type="button" class="btn" id="legalAccept">I have read and accept</button>
+    </footer>
+  </div>
 </div>
 
 <datalist id="countries"></datalist>
@@ -725,6 +1017,586 @@ body{overflow:hidden}
   </div>
 </div>
 
+<script>
+/* Legal texts supplied by the client (Automobili Lamborghini). Generated from the PDFs — do not edit by hand. */
+window.URUS_LEGAL = {
+ "cookie-policy": {
+  "kicker": "Website",
+  "title": "Cookie Policy",
+  "blocks": [
+   [
+    "p",
+    "Automobili Lamborghini S.p.A. (“Lamborghini”), with registered office in Via Modena 12, Sant’Agata Bolognese (BO), Italy, which acts as data controller, uses cookies in compliance with the applicable regulatory provisions and, in particular, with EU Regulation UE 2016/679 and Italian Legislative Decree 196/2003."
+   ],
+   [
+    "p",
+    "The Data Protection Officer (DPO) can be contacted by writing to the address dpo@lamborghini.com, also to exercise the rights provided for by legislation in force on the subject as described in our privacy policy."
+   ],
+   [
+    "p",
+    "Cookies, as described by the relevant legislation, are small text files which the site sends to the user’s browser, where they are stored to then be sent back to the same site when it is subsequently visited again by the same user. When browsing the site, the user may also receive cookies on their terminal sent by other web servers or sites (“third-party cookies\") which contain some of the elements (e.g. images, maps, audio, specific links to pages of other domains) displayed on the site they are currently visiting. Cookies are used for different purposes: session monitoring, storage of information about specific configurations regarding the users accessing the server, data analysis, statistics, etc. In the case of third-party cookies, the data will be sent to the relevant third party."
+   ],
+   [
+    "p",
+    "In implementing the provisions of Directive 2009/136/EC, prior and informed consent of the users to install cookies used for purposes other than merely technical in nature must be acquired. “Strictly necessary cookies” and “functionality cookies” fall within the category of technical cookies and they shall be installed without prior consent and cannot be disabled."
+   ],
+   [
+    "p",
+    "This website installs technical cookies only."
+   ],
+   [
+    "p",
+    "Cookies can be authorized, restricted or blocked also through browser settings. However, the device will be set in such a way as to refuse the technical or navigation cookies, and some site services might not be correctly displayed or function optimally. To disable the cookies, follow the cookie management instructions provided on the browser."
+   ],
+   [
+    "table",
+    {
+     "head": [
+      "Name",
+      "Description",
+      "Duration",
+      "Type"
+     ],
+     "empty": "This website does not currently set any cookies."
+    }
+   ]
+  ]
+ },
+ "privacy-policy": {
+  "kicker": "Website",
+  "title": "Privacy Policy",
+  "blocks": [
+   [
+    "h",
+    "1 • Introduction"
+   ],
+   [
+    "p",
+    "Welcome to our website. When you view our website or use its services (hereinafter the \"Site\" and the \"Services\"), we collect information and personal data relating to you. For this reason, pursuant to Regulation (EU) 2016/679 (the General Data Protection Regulation, GDPR) and the national applicable legislation (together, \"Data Protection Legislation\"), we have created this document (hereinafter \"Privacy Policy\") in order to describe the personal data we collect, the purposes and method of processing of these data, and the safety methods we adopt to protect them."
+   ],
+   [
+    "h",
+    "2 • Sources of the Data and Purposes of Processing"
+   ],
+   [
+    "h",
+    "2.1 Navigation Data"
+   ],
+   [
+    "p",
+    "The IT systems responsible for the correct operation of the Site acquire some of your personal data during the course of their operation; the transmission of this is implicit in the use of the Internet communication protocols. This information is not collected for the purpose of identifying you, however it could be used to this end if, for example, it were combined with information held by third parties. This category of data includes the IP address and domain name of your computer, addresses in URI (Uniform Resource Identifier) notation of the requested resources, the time of the request, the method used to issue the request to the server, the size of the file obtained in response, the numerical code indicating the status of the response given by the server, and other parameters concerning your operating system. We use these data only to obtain anonymous statistical information on use of the Site and to check it is operating correctly. We delete data collected in this manner immediately after processing. These data could be used to determine responsibility in the event of computer crimes carried out against the Services."
+   ],
+   [
+    "h",
+    "2.2 Registration Information and other Information Provided by the User"
+   ],
+   [
+    "p",
+    "The use of certain Services will require the transmission of personal data, for which dedicated information notices are supplied. Please read the dedicated information notices so as to be aware of the purposes of such data gathering, whether providing the information is obligatory, and to which parties it may be transmitted or communicated."
+   ],
+   [
+    "p",
+    "If you should collect, process and communicate to us information relating to third parties, you must do so pursuant to the provisions of applicable Data Protection Legislation, therefore providing said third parties with prior information on the processing, and where required obtain free and express consent before performing such operations."
+   ],
+   [
+    "h",
+    "2.3 Purposes of the Processing"
+   ],
+   [
+    "p",
+    "Providing the information specified above is necessary to allow you to use our Services, and to allow us to respond to your requests for information or requests for activation of certain Services. Your refusal would prevent you from using our services and prevent us from responding to your requests."
+   ],
+   [
+    "h",
+    "2.4 Lawful Basis for Processing"
+   ],
+   [
+    "p",
+    "We will process your personal data only where one of the lawful bases outlined in the current legislation is present, more specifically legitimate interest on the part of Lamborghini, with particular reference to the ordinary management and maintenance of the site."
+   ],
+   [
+    "h",
+    "3 • Data Processing and Storage Methods"
+   ],
+   [
+    "p",
+    "We will process your data both on hardcopy and through the use of electronic tools, but always in compliance with the security requirements specified by applicable legislation. Our security measures include contractual tools from any contractor (e.g. supplier of services) or agent in order to guarantee the security and confidentiality of your personal data pursuant to the provisions of the Data Protection Legislation."
+   ],
+   [
+    "p",
+    "Your personal data will be retained for the time strictly necessary to achieve the ends for which they were gathered and to comply with applicable legal and regulatory requirements. The data will be permanently deleted or anonymised when the purposes indicated above have been achieved, except in cases where Lamborghini is required to archive them for a further period in order to comply with legal or regulatory requirements."
+   ],
+   [
+    "p",
+    "With particular reference to legal protection of our rights, we inform you that we have adopted a retention period of ten years for personal data, which runs from the date on which the account was closed, based on the ten-year limitation period laid out in article 2946 of the Italian Civil Code."
+   ],
+   [
+    "h",
+    "4 • Scope of Communication"
+   ],
+   [
+    "h",
+    "4.1 Internal and External Communication of Personal Data"
+   ],
+   [
+    "p",
+    "Your personal data will be processed internally only by parties nominated in advance as data supervisors or processors. Specifically, your data may be transmitted to the following categories of external parties: (professional and technical) providers of services and legitimate recipients in accordance with the legislation. The recipients of the data shall act as data controllers, supervisors or processors in accordance with the applicable legislation. Whenever our company, or a part of it, should be involved in a reorganization, acquisition or sale, we will send your data to third parties involved in the procedure. Any third party recipient of your personal data may only use them within the limits laid out in this Privacy Policy."
+   ],
+   [
+    "h",
+    "4.2 Transfer of Data Abroad"
+   ],
+   [
+    "p",
+    "We may send your personal data out of Italy to established third-party recipients within the European Union. This transfer is not subject to limitations inasmuch as any EU country guarantees an appropriate level of data protection. For the purposes described above we may also, however, send your data to third (non-EU) countries which do not guarantee the same level of data protection. Nevertheless, such transfers to third countries shall always be performed in accordance with the provisions of the Data Protection Legislation, in other words subject to obtaining your consent, where necessary, or through the adoption of any other measure necessary to guarantee the security of the data being transferred. These measures include possible contractual agreements based on the so-called standard contractual clauses, as drafted by the European Commission."
+   ],
+   [
+    "h",
+    "5 • Rights of the Data Subject"
+   ],
+   [
+    "p",
+    "You may exercise the rights provided to you by the Data Protection Legislation at any time; you may thus, for example, access your data, check their content, origin and accuracy, request updates, additions, modifications or deletions to the data, oppose the processing or request that this be limited, or make portability requests. To exercise these rights, please contact us using the details in section 6."
+   ],
+   [
+    "h",
+    "6 • Data Controller and Data Protection Officer"
+   ],
+   [
+    "p",
+    "The Site and the Services are managed by Automobili Lamborghini S.p.A., Via Modena 12, Sant’Agata Bolognese, Italy, which acts as Data Controller."
+   ],
+   [
+    "p",
+    "If you wish, you can also contact our Data Protection Officer (DPO) by writing to: dpo@lamborghini.com."
+   ]
+  ]
+ },
+ "terms-of-use": {
+  "kicker": "Website",
+  "title": "Terms of Use",
+  "blocks": [
+   [
+    "p",
+    "By accessing any part or section of this site, the User agrees to be legally bound by the following terms and conditions."
+   ],
+   [
+    "h",
+    "Definitions"
+   ],
+   [
+    "p",
+    "\"Lamborghini\" means Automobili Lamborghini S.p.A. – a company with sole shareholder belonging to the Audi Group - headquartered at Via Modena 12, Sant’Agata Bolognese (BO), Italy."
+   ],
+   [
+    "p",
+    "“Site” means the Lamborghini website urusdynamic.com, managed by the same or its providers."
+   ],
+   [
+    "p",
+    "“User” or “You” means any visitor to or user of the site."
+   ],
+   [
+    "h",
+    "Intellectual Property Rights"
+   ],
+   [
+    "p",
+    "The information, data, software, photographs, graphics, videos, backgrounds, fonts, graphic design, music, sounds, images, illustrations, drawings, icons, text and any other material present on the Site is work belonging to Lamborghini and/or third parties, and is protected by copyright."
+   ],
+   [
+    "p",
+    "The duplication, reproduction (even partial), downloading, saving, publication or distribution by any means, and more generally any action involving transfer or use of the information or material present on the site, in any form, using either existing or future technologies, is prohibited without express written authorization from the legitimate owner."
+   ],
+   [
+    "h",
+    "Trademarks"
+   ],
+   [
+    "p",
+    "\"Automobili Lamborghini\" is a word mark and figurative mark owned by Lamborghini; the logos used on this site are also registered by the same."
+   ],
+   [
+    "p",
+    "The brands and logos of third parties used on the Site are the exclusive property of their respective owners."
+   ],
+   [
+    "p",
+    "The use and reproduction in any form and manner of the above-mentioned brands and logos is strictly prohibited."
+   ],
+   [
+    "h",
+    "Permitted Use"
+   ],
+   [
+    "p",
+    "The User is permitted to access the Site for legitimate uses and commits not to use it for speculative, deceitful or fraudulent activities."
+   ],
+   [
+    "p",
+    "Unless otherwise and expressly specified, all parts or sections of this Site, and the information and material available therein, are destined exclusively for the use provided for, i.e. reading and consultation."
+   ],
+   [
+    "h",
+    "General Limits of Responsibility"
+   ],
+   [
+    "p",
+    "The information, software and services included on or available from the Site may contain errors or inaccuracies."
+   ],
+   [
+    "p",
+    "Information is updated periodically. Lamborghini and/or its providers reserve the right to make improvements and/or changes to the Site and/or services at any time."
+   ],
+   [
+    "p",
+    "Lamborghini and/or its providers do not make any warranty or declaration concerning the appropriateness, reliability, availability, timeliness, lack of viruses/malware or any other components which may cause damage, or regarding the accuracy of the information, the software, the services and corresponding graphical material contained on the Site, or in the services offered in relation to any purpose."
+   ],
+   [
+    "p",
+    "In no case shall Lamborghini and/or its providers be held liable for direct or indirect, punitive, incidental, special or secondary damages or for any kind of losses, including loss of use, data or profits, deriving from or in any way connected to the use or execution of the Site/Services, delays with or inability to use the Site or corresponding services, the supply or lack of supply of services, or any information, software, products, service and corresponding graphics obtained via the Site."
+   ],
+   [
+    "p",
+    "In no case shall Lamborghini and its directors, managers, employees or contractors be held responsible for injuries, losses, claims or damages, incidental or indirect of any type, based on contracts, illicit actions or other, deriving from or in any way connected with use of the Site in a manner which does not conform to the terms and conditions provided herein, even if Lamborghini has been informed of the possibility of that damage."
+   ],
+   [
+    "h",
+    "Links to other websites"
+   ],
+   [
+    "p",
+    "The Site contains references to products and services supplied by third parties and links to third-party websites."
+   ],
+   [
+    "p",
+    "Lamborghini provides no guarantees and assumes no responsibility for the accuracy and completeness of the information and other contents provided by third parties or available on third-party websites."
+   ],
+   [
+    "p",
+    "Lamborghini is not responsible for the content, availability, operation or execution of any other website to which the Site may link, or which may be accessible from the Site."
+   ],
+   [
+    "h",
+    "Privacy Protection"
+   ],
+   [
+    "p",
+    "Lamborghini is committed to respecting the privacy and security of its Users. Data which is voluntarily communicated by the User to Lamborghini shall be handled with maximum care and with all tools necessary to guarantee its security, in full respect of strict Italian privacy legislation, and as specified in the information statement. Please see the relevant privacy policy and information statements for further details."
+   ],
+   [
+    "h",
+    "Cookies"
+   ],
+   [
+    "p",
+    "Please refer to the specific Cookie Policy."
+   ],
+   [
+    "h",
+    "Third-party content and sections"
+   ],
+   [
+    "p",
+    "The Site contains sections, articles and, in general, material managed or provided by third parties."
+   ],
+   [
+    "p",
+    "Lamborghini takes no responsibility for the legality, truthfulness, accuracy, completeness or any other characteristic of the above-mentioned material or sections of the Site managed by third parties."
+   ],
+   [
+    "p",
+    "Responsibility for the contents of the above-mentioned material or Site sections, including the ownership and right to use the texts, images, photographs, music, videos or anything else lies exclusively with the aforesaid third parties. Any claims concerning the contents of the material or sections of the Site managed or provided by third parties should be addressed exclusively to the corresponding authors or suppliers."
+   ],
+   [
+    "h",
+    "Communications and Complaints"
+   ],
+   [
+    "p",
+    "Lamborghini shall remove in a timely fashion any material published on the Site which should prove to be the property of third parties other than the above-mentioned authors or suppliers of the material or section who can legitimately exercise rights or interests over the material and its contents, or whenever the material or its contents should harm interests or rights protected by law or otherwise represent a violation of law."
+   ],
+   [
+    "p",
+    "Any request, report or claim should be addressed to:"
+   ],
+   [
+    "p",
+    "Automobili Lamborghini S.p.A., via Modena 12, 40019 Sant’Agata Bolognese, Italy."
+   ],
+   [
+    "p",
+    "Tel: + 39 051 959 7282"
+   ],
+   [
+    "p",
+    "Email: customercare@lamborghini.com"
+   ],
+   [
+    "h",
+    "Suspension of the Service"
+   ],
+   [
+    "p",
+    "Lamborghini may, at its sole discretion and at any moment, terminate or suspend User access to all or part of the Site."
+   ],
+   [
+    "h",
+    "Entire Agreement"
+   ],
+   [
+    "p",
+    "These terms and conditions represent the entirety of the agreement between you and Lamborghini concerning use of the Site and replace any previous declaration or agreement."
+   ],
+   [
+    "p",
+    "The User hereby declares to have been informed of the fact that purchasing, reserving or booking products or services, and the use of particular services or specific parts of the Site, is regulated by further legal and/or contractual limitations, according to the indications provided on the Site itself."
+   ],
+   [
+    "p",
+    "Lamborghini may, at any moment and at its sole discretion, modify the terms and conditions provided herein and publish new terms and conditions on this site, which shall apply from the moment of their publication. Use of the Site by the User shall be regulated by the terms and conditions published on the site at the time of such use."
+   ],
+   [
+    "p",
+    "Should any doubt arise concerning the meaning or interpretation of this policy, the Italian-language version of this policy shall prevail."
+   ],
+   [
+    "h",
+    "Applicable law and competent court."
+   ],
+   [
+    "p",
+    "These terms and conditions are regulated by Italian law."
+   ],
+   [
+    "p",
+    "Any dispute arising from or in connection with these terms and conditions shall be decided exclusively before the Court of Bologna, Italy. It is understood that in case of mandatory rules in the matter of the jurisdiction of the “consumer” these shall prevail."
+   ]
+  ]
+ },
+ "purposes-of-processing": {
+  "kicker": "Registration",
+  "title": "Purposes of Processing – Privacy Policy",
+  "blocks": [
+   [
+    "p",
+    "Please be informed that Automobili Lamborghini S.p.A. in its quality of data controller (\"Lamborghini\") will process your personal data in for the purposes specified below in accordance and in compliance with the EU Regulation 2016/679 (General Data Protection Regulation, the \"Regulation\")."
+   ],
+   [
+    "h",
+    "Purposes and legal bases of processing. Consequences of not providing your personal data"
+   ],
+   [
+    "p",
+    "Lamborghini collects and processes the personal data you provide for the following purposes:"
+   ],
+   [
+    "li",
+    "a) management of the relationship with the data subject for the participation in the event for which you are registering (the “Event”), and, particularly, in order to formalize your registration and carry out the formalities arising from registration, as well as for the provision of the information, assistance, and services requested;"
+   ],
+   [
+    "li",
+    "b) to perform all the duties arising from legislative, regulatory and contractual obligations related to the relationship that Lamborghini has been entered into with you."
+   ],
+   [
+    "p",
+    "The provision of data for the purpose specified in letter a) is necessary in order to manage your participation in the Event. Your refusal to provide personal data may prevent you from participating in the Event. Collection of the abovementioned information is connected to the pursuance of the obligations arising from the contractual relationship that Lamborghini enters into with you. The provision of data for the purpose specified in letter b) is necessary aiming to fulfil any legal and regulatory obligation. Your refusal to provide personal data may prevent you from participating in the Event."
+   ],
+   [
+    "h",
+    "Method of processing and storage of personal data"
+   ],
+   [
+    "p",
+    "Lamborghini processes your personal data either with or without electronic tools, and in any case in compliance with the security requirements requested by applicable laws. Only duly authorized Lamborghini personnel will have access to your personal data. Your personal data will be kept for the time strictly necessary to achieve the purposes they have been collected for and in order to comply with applicable law and regulatory obligations. The data will be either deleted or permanently anonymized once the abovementioned purposes have been achieved, unless Lamborghini is required to keep the data for a longer period due to law or regulatory obligations, as well as in case of judicial proceedings or investigations."
+   ],
+   [
+    "h",
+    "Disclosure of your personal data to third parties"
+   ],
+   [
+    "p",
+    "According to the Regulation, your personal data obtained from time to time for the purposes specified above, may be disclosed to companies belonging to either the Volkswagen-Audi group, to which Lamborghini belongs, possibly based in countries not belonging to the European Union. However, such transfer to third parties countries will comply with the provisions of the Regulation, by means of the implementation of all necessary measures to ensure the security of the data transferred, including the execution of contractual agreements based on the standard contractual clauses developed by the European Commission."
+   ],
+   [
+    "p",
+    "Your personal data may also be disclosed to natural and legal persons if such disclosure is necessary or desirable for the administrative and organizational management of the Event, to banking institutions in order to manage collections and payments, to insurance institutions, to collaborators, interns and consultants that have been specifically instructed within the framework of their relative duties and to photographers acting as independent data controllers or as external professionals appointed by virtue of specific contracts."
+   ],
+   [
+    "p",
+    "Your personal data will not be disseminated."
+   ],
+   [
+    "h",
+    "Controller and Data protection officer"
+   ],
+   [
+    "p",
+    "Automobili Lamborghini S.p.A., with registered office in via Modena 12, 40019 Sant’Agata Bolognese (BO), Italy is the Data controller. The Data Protection Officer is domiciled in the Data controller’s offices and can be contacted at the following email address: dpo@lamborghini.com."
+   ],
+   [
+    "h",
+    "Your rights"
+   ],
+   [
+    "p",
+    "You can contact Lamborghini in order to obtain an updated list of our Processors and the persons and entities to which data is disclosed, as well as to exercise your rights under articles 15-22 of the Regulation at any time, e.g. obtain confirmation as to whether or not personal data concerning him or her exists, check its content, source, request data portability, restrict the processing, object to the processing on legitimate grounds, such as object to marketing activities. You have the right to revoke your consent at any time, as well as to lodge a complaint with the supervisory authority (Garante per la Protezione dei Dati Personali)."
+   ]
+  ]
+ },
+ "photo-video-disclaimer": {
+  "kicker": "Registration · Photo-Video Disclaimer",
+  "title": "Disclaimer for recording and publication of material",
+  "blocks": [
+   [
+    "p",
+    "(hereinafter the “Document”)"
+   ],
+   [
+    "p",
+    "The Undersigned (meaning the signatory of this document) (the “Undersigned”) herewith AUTHORIZES Automobili Lamborghini S.p.A., an Italian company with sole shareholder subject to the management and coordination of Audi AG, with registered offices at Via Modena 12, Sant’Agata Bolognese (BO), Italy, VAT No.IT00591801204 (hereinafter “Lamborghini”) to shooting (video and photographic) on the occasion of the Dynamic launch event, February-March 2027 (hereinafter the “Material”) for the creation of promotional and advertising material at Lamborghini’s sole and exclusive discretion (hereinafter referred to as the “Purpose”). At the light of the above, Lamborghini is expressly authorized by the Undersigned to use, reproduce, publish, communicate, distribute, market the Material for any purpose and in any way and form, in any type of support, in any manner or media (whether now known or hereafter developed or discovered, such as – by way of an example but not limited to – web and social channels such as: LinkedIn, Facebook, Twitter, Instagram or Youtube), anytime and in any part of the world, with the right to assign or grant its use to third parties (“Reproduction Rights”). Reproduction Rights include the right to reproduce/have reproduces and/or publish/have published and/or transmit/have transmitted and/or disseminate/have disseminate such Material by any means, mode, form and manner, original or derivative, direct or indirect, temporary or permanent (including, but not limited to, journals, catalogues, television, newspaper, magazines, interactive and non-interactive multimedia exploitation, on-line and off-line use, websites, social media, home video and commercial video, cable, satellite, internet technology, e-book, reproduction and use through audiovisual media of any kind such as videotapes, film, slides, tapes, CDs, CD-Roms, CD-TVs, DVDs, databases, electronic media, magnetic media and any other analog or similar to the above existing or future) and though any distribution platform. Additionally, Lamborghini shall has the exclusive and unlimited rights to rework and use the Material in any manner and form and in any type of medium, whether existing or future in Italy and worldwide, including the right to assign the rights on such new works to third parties (the “Rights to Re-elaborate”)."
+   ],
+   [
+    "p",
+    "The Undersigned declares that has no claims (economic or otherwise) against Lamborghini for the granting of rights to the Material. It is understood that the use of the Material is at the sole discretion of Lamborghini. Lamborghini has the right to archive the Material without any use, and the Undersigned declares that has no claims in this regard."
+   ],
+   [
+    "p",
+    "The Undersigned acknowledges and agrees that the Rights of Reproduction and Reworking of the Material are granted free of charge, without time and territorial limitations, and for any purpose, including commercial and marketing activities. Therefore, the Undersigned declares that they have no claims against Lamborghini regarding compensation for the use of the Material."
+   ],
+   [
+    "p",
+    "Without prejudice to the above, the Undersigned declares to indemnify and hold Lamborghini harmless from any claims, including those of third parties such as - by way of example but not limited to - partners and/or sponsors connected to the Undersigned, arising from this Authorization, for any reason, arising from the violation, by way of example but not limited to, of their obligations provided in various agreements; as well as from any damage, cost, and expense, including legal fees, that Lamborghini may incur in this regard."
+   ],
+   [
+    "p",
+    "In addition to the above, the Undersigned declares that they have no agreements with third parties that may conflict with the authorization granted to Lamborghini and, for this reason, acknowledges and agrees to assume any responsibility arising from any claims made by third parties arising from the violation of third-party rights, indemnifying and holding Lamborghini harmless from any damage, cost, and expense that it may incur in this regard."
+   ],
+   [
+    "p",
+    "It is expressly understood between the Parties that the use of the Material will be in full respect of the dignity of the subject portrayed and therefore will not be used in any way that could potentially damage the honor, reputation, or dignity of the subject portrayed. Lamborghini."
+   ],
+   [
+    "p",
+    "It is also agreed to Lamborghini – by the Undersigned – the right to transfer the rights on the Material hereby granted to third parties at the same terms and conditions hereby set forth at Lamborghini’s sole and exclusive discretion, included all companies of Volkswagen Gorp and all the companies subject to the management and coordination of Audi AG (collectively the “Companies”), their directors, employees, suppliers, sponsors and/or any other persons and/or entity for which the Companies are responsible (said directors, employees, suppliers, sponsors and any other persons and/or entity for which the Companies are responsible are hereby collectively referred to as the “Company People”)"
+   ],
+   [
+    "p",
+    "Because of the foregoing, the Undersigned declare that have nothing to claim against Lamborghini and to Volkswagen Group which Automobili Lamborghini S.p.A. is part of, or to suppliers, sponsors, or distributor of the latter for the granting of rights to the Material hereby set forth."
+   ],
+   [
+    "p",
+    "The Undersigned further declares that the invalidity or ineffectiveness of one or more of the clauses of this declaration does not affect the validity or effectiveness of the remaining parts of the declaration or the declaration as a whole; to accept that this declaration and its effects must be interpreted and are subject to Italian law; for any dispute arising from and/or in connection with this declaration the Court of Bologna will have exclusive jurisdiction."
+   ],
+   [
+    "p",
+    "This Document shall be considered valid and effective for all legal purposes from the date of signing."
+   ],
+   [
+    "h",
+    "INFORMATION ABOUT THE PROCESSING OF PERSONAL DATA"
+   ],
+   [
+    "p",
+    "Pursuant to the General Data Protection Regulation n. 679/2016 (\"GDPR\") and the local applicable law (together, \"Privacy Law\"), please be informed that Automobili Lamborghini S.p.A. (\"Lamborghini\") with legal seat at Sant’Agata Bolognese, Via Modena 12 in its quality of Data Controller will process your personal data – images included – in compliance with applicable laws. Please note the following terms."
+   ],
+   [
+    "h",
+    "Purposes of processing and relevant legal basis"
+   ],
+   [
+    "p",
+    "The personal data you provide shall be processed for the following purposes: during the Event for information/promotional purposes of Lamborghini, also by means of publication of the Images on any kind of means of communication, including Lamborghini’s website and social media. In achieving this purpose, Lamborghini shall rely on your prior consent as legitimate legal ground."
+   ],
+   [
+    "h",
+    "Methods of processing and data retention period"
+   ],
+   [
+    "p",
+    "Your personal data will be processed for the purposes specified above using both automated and non-automated tools, in accordance with the principles of confidentiality and security measures prescribed by Privacy Law. Only the personnel that has been duly authorized shall access to your data."
+   ],
+   [
+    "p",
+    "We will only retain your personal information for as long as necessary to fulfil the purposes we collected it for, including for the purpose of satisfying any legal or accounting requirements. When we no longer need to use your personal data we will remove it from our systems and records and/or take steps to properly anonymize it so that you can no longer be identified from it (unless we need to keep your information to comply with legal, regulatory or judicial obligations to which Lamborghini is subject)."
+   ],
+   [
+    "h",
+    "Entities who may gain access to personal data"
+   ],
+   [
+    "p",
+    "The personal data you provide may be disclosed and transferred to other entities operating on behalf of Lamborghini in fulfillment of specific contractual obligations, as well as companies belonging to the Volkswagen-Audi Group for purposes specified above. If your personal data shall be transferred to any recipients located outside the European Union Lamborghini will adopt adequate measures as laid down in art. 44 and subsequent of the GDPR (e.g. the adoption of standard contractual clauses). The personal data shall be communicated by the Data Controller to the abovementioned third parties and provided to the appointed Data Processors and People authorized of the processing."
+   ],
+   [
+    "h",
+    "Consequences of providing personal data"
+   ],
+   [
+    "p",
+    "The decision to provide your personal data – images and sensitive data included in case of need - for the purpose specified above in the Section “Purposes of processing” is discretionary, since it is not arising from a law duty but your failure to provide your personal data may make it impossible to manage your attendance to the Event."
+   ],
+   [
+    "h",
+    "Data Subject rights"
+   ],
+   [
+    "p",
+    "Pursuant to art. 15 - 22 of the GDPR, you have some rights that Lamborghini is obligated to honor. The following are the most important rights you may exercise:"
+   ],
+   [
+    "li",
+    "to obtain confirmation of whether or not Automobili Lamborghini S.p.A. is in possession of your personal data;"
+   ],
+   [
+    "li",
+    "to be informed of the source of your personal data, and of the purposes and methods of its processing;"
+   ],
+   [
+    "li",
+    "to obtain the deletion, updating, correction or integration of your personal data;"
+   ],
+   [
+    "li",
+    "to obtain the data portability;"
+   ],
+   [
+    "li",
+    "to restrict or object the processing of your personal data for commercial, advertising or market research purposes;"
+   ],
+   [
+    "li",
+    "to withdraw your consent at any moment;"
+   ],
+   [
+    "li",
+    "to lodge a complaint to the competent supervisory authority;"
+   ],
+   [
+    "li",
+    "to identify the Data Processor and the Data Controller."
+   ],
+   [
+    "h",
+    "Data Controller and Data Protection Officer"
+   ],
+   [
+    "p",
+    "The data controller is Automobili Lamborghini S.p.A. with registered office at Sant’Agata Bolognese (BO), via Modena, 12 I-40019, Bologna, Italy. The Data Protection Officer is domiciled at Automobili Lamborghini S.p.A. and may be contacted at dpo@lamborghini.com."
+   ],
+   [
+    "p",
+    "The Undersigned agrees to allow the processing of my personal data (images included), as hereby set forth in the section “Purposes of processing”, which includes the right of the publication of the Images."
+   ],
+   [
+    "p",
+    "The Undersigned agrees to allow the transfer of my personal data (images included) to third parties, as well as companies belonging to the Volkswagen-Audi Group, for the purposes set forth in the relevant section above."
+   ]
+  ]
+ }
+};
+
+</script>
 <script>
 /* ==========================================================================
    URUS AT ITS PEAK — Media registration · front-end logic
@@ -766,6 +1638,7 @@ body{overflow:hidden}
   const nextBtn = $('#nextBtn');
   let current = 0;
   let maxReached = 0;
+  let currentSection = 'registration';
 
   /* ---------- Dates ---------- */
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -804,7 +1677,7 @@ body{overflow:hidden}
 
   const c = CONFIG.concierge;
   $$('[data-concierge]').forEach(el => {
-    el.innerHTML = `<b>Lamborghini Concierge</b>Hotline: ${c.phone} · ${c.hours}<br>E-mail: <a href="mailto:${c.email}">${c.email}</a>`;
+    el.innerHTML = `<b><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-headset"/></svg>Lamborghini Concierge</b>Hotline: ${c.phone} · ${c.hours}<br>E-mail: <a href="mailto:${c.email}">${c.email}</a>`;
   });
 
   /* ---------- Countries (datalist) ---------- */
@@ -1031,7 +1904,7 @@ body{overflow:hidden}
     const s = $(sel); s.hidden = false;
     $$('[data-salutation]', s).forEach(el => (el.textContent = name || 'guest'));
     $$('[data-email-echo]', s).forEach(el => (el.textContent = form.email.value));
-    setBg('peak');
+    if (currentSection === 'registration') setBg('peak');
     s.focus({ preventScroll: true });
     s.scrollTop = 0;
   }
@@ -1047,6 +1920,188 @@ body{overflow:hidden}
   } else {
     go(0, { focus: false });
   }
+
+  /* ---------- Program: real dates for Day 1 / 2 / 3 from the guest's wave ---------- */
+  const WEEKDAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  $$('[data-day]').forEach(el => {
+    if (!wave) return;
+    const x = d(wave.from); x.setDate(x.getDate() + Number(el.dataset.day));
+    el.textContent = `${WEEKDAYS[x.getDay()]} ${x.getDate()} ${months[x.getMonth()]}`;
+  });
+
+  /* ---------- Sections: Registration · Program · Travel & Accommodation · FAQ ---------- */
+  const sections = $$('[data-section]');
+  const secBtn = $('#secnavBtn'), secMenu = $('#secnavMenu'), secLabel = $('#secnavLabel');
+  function regBg() {
+    const finalOpen = !$('#doneScreen').hidden || !$('#declineScreen').hidden;
+    return finalOpen ? 'peak' : steps[current].dataset.bg;
+  }
+  /* Crossfade between sections: the box on screen fades out, then the new one fades in */
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const OUT_MS = 280, IN_MS = 520, EASE_IN = 'cubic-bezier(.4,0,1,1)', EASE_OUT = 'cubic-bezier(.22,1,.36,1)';
+  let swapToken = 0;
+  const visibleSection = () => sections.find(s => !s.hidden);
+  const fadeTargets = sec => sec.classList.contains('reg')
+    ? [...sec.children].filter(el => !el.hidden && getComputedStyle(el).display !== 'none')
+    : [sec];
+  function showSection(name, { updateHash = true, focus = false, animate = true } = {}) {
+    const target = sections.find(s => s.dataset.section === name);
+    if (!target) return false;
+    const prev = visibleSection();
+    currentSection = name;
+    secLabel.textContent = target.dataset.label;
+    $$('[data-section-link]', secMenu).forEach(a => {
+      if (a.dataset.sectionLink === name) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    setBg(name === 'registration' ? regBg() : target.dataset.bg);
+    if (updateHash && location.hash !== '#' + name) history.replaceState(null, '', '#' + name);
+    const token = ++swapToken;
+    const swapIn = () => {
+      if (token !== swapToken) return;
+      sections.forEach(s => (s.hidden = s !== target));
+      if (name !== 'registration') target.scrollTop = 0;
+      if (animate && !reduceMotion && prev !== target) {
+        fadeTargets(target).forEach(el => el.animate(
+          [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }],
+          { duration: IN_MS, easing: EASE_OUT }));
+      }
+      if (focus) {
+        const h = target.querySelector('.step__title') || target.querySelector('h2');
+        if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+      }
+    };
+    if (!prev || prev === target || !animate || reduceMotion) { swapIn(); return true; }
+    const outs = fadeTargets(prev);
+    Promise.all(outs.map(el => el.animate(
+      [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-8px)' }],
+      { duration: OUT_MS, easing: EASE_IN, fill: 'forwards' }).finished.catch(() => {})))
+      .then(() => {
+        swapIn();
+        outs.forEach(el => el.getAnimations().forEach(a => { if (a.effect && a.effect.getTiming().fill === 'forwards') a.cancel(); }));
+      });
+    return true;
+  }
+  function setMenu(open) {
+    secMenu.hidden = !open; secBtn.setAttribute('aria-expanded', String(open));
+    if (open) (secMenu.querySelector('[aria-current="page"]') || secMenu.querySelector('a')).focus();
+  }
+  secBtn.addEventListener('click', () => setMenu(secMenu.hidden));
+  secMenu.addEventListener('click', e => {
+    const a = e.target.closest('[data-section-link]'); if (!a) return;
+    e.preventDefault(); setMenu(false); showSection(a.dataset.sectionLink, { focus: true });
+  });
+  secMenu.addEventListener('keydown', e => {
+    const items = $$('a', secMenu); const i = items.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+    if (e.key === 'Escape') { setMenu(false); secBtn.focus(); }
+  });
+  document.addEventListener('click', e => { if (!secMenu.hidden && !e.target.closest('.secnav')) setMenu(false); });
+
+  /* ---------- FAQ: smooth, exclusive accordion ---------- */
+  const faqItems = $$('.faq details');
+  const OPEN_MS = 460, CLOSE_MS = 340;
+  function animateFaq(d, open) {
+    const summary = d.querySelector('summary'), body = d.querySelector('p');
+    d._anim?.cancel(); d._fade?.cancel();
+    const start = d.getBoundingClientRect().height;
+    const frame = d.offsetHeight - d.clientHeight;            // borders
+    if (open) d.open = true;
+    const end = open ? (d.style.height = 'auto', d.getBoundingClientRect().height) : summary.getBoundingClientRect().height + frame;
+    d.style.height = ''; d.style.overflow = 'hidden';
+    d.classList.toggle('is-opening', open); d.classList.toggle('is-closing', !open);
+    d._anim = d.animate([{ height: start + 'px' }, { height: end + 'px' }],
+      { duration: open ? OPEN_MS : CLOSE_MS, easing: open ? 'cubic-bezier(.22,1,.36,1)' : 'cubic-bezier(.4,0,.2,1)' });
+    d._fade = body.animate(open
+      ? [{ opacity: 0, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'none' }]
+      : [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-4px)' }],
+      { duration: open ? OPEN_MS : CLOSE_MS * .7, easing: 'ease', fill: 'both' });
+    d._anim.onfinish = () => {
+      if (!open) d.open = false;
+      d.style.overflow = ''; d.classList.remove('is-opening', 'is-closing');
+      d._fade?.cancel(); d._anim = d._fade = null;
+      if (open) {                                                 // keep the answer in view inside the scrolling card
+        const card = d.closest('.card'), r = d.getBoundingClientRect(), c = card.getBoundingClientRect();
+        if (r.bottom > c.bottom - 16) card.scrollBy({ top: Math.min(r.bottom - c.bottom + 24, r.top - c.top - 16), behavior: 'smooth' });
+      }
+    };
+    d._anim.oncancel = () => { d.style.overflow = ''; };
+  }
+  faqItems.forEach(d => {
+    d.querySelector('summary').addEventListener('click', e => {
+      e.preventDefault();
+      const willOpen = !d.open || d.classList.contains('is-closing');
+      if (reduceMotion) { faqItems.forEach(o => { if (o !== d) o.open = false; }); d.open = willOpen; return; }
+      if (willOpen) faqItems.forEach(o => { if (o !== d && o.open && !o.classList.contains('is-closing')) animateFaq(o, false); });
+      animateFaq(d, willOpen);
+    });
+  });
+
+  /* ---------- Legal documents (client texts) in a modal ---------- */
+  const LEGAL = window.URUS_LEGAL || {};
+  const modal = $('#legalModal'), mBody = $('#legalBody'), mFoot = $('#legalFoot');
+  let lastFocus = null, consentFor = null;
+  function renderBlocks(blocks) {
+    let html = '', list = '';
+    const flush = () => { if (list) { html += `<ul>${list}</ul>`; list = ''; } };
+    blocks.forEach(([kind, t]) => {
+      if (kind === 'li') { list += `<li>${esc(t)}</li>`; return; }
+      flush();
+      if (kind === 'h') html += `<h3>${esc(t)}</h3>`;
+      else if (kind === 'table') html += `<div class="tbl"><table><thead><tr>${t.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody><tr><td colspan="${t.head.length}">${esc(t.empty)}</td></tr></tbody></table></div>`;
+      else html += `<p>${esc(t).replace(/([\w.+-]+@[\w-]+\.[\w.]+[a-z])/gi, '<a href="mailto:$1">$1</a>')}</p>`;
+    });
+    flush(); return html;
+  }
+  function openLegal(id, consentName = null) {
+    const doc = LEGAL[id]; if (!doc) return false;
+    lastFocus = document.activeElement; consentFor = consentName;
+    $('#legalKicker').textContent = doc.kicker;
+    $('#legalTitle').textContent = doc.title;
+    mBody.innerHTML = renderBlocks(doc.blocks); mBody.scrollTop = 0;
+    mFoot.hidden = !consentName;
+    modal.hidden = false;
+    $('.modal__close', modal).focus();
+    return true;
+  }
+  function closeLegal() {
+    if (modal.hidden) return;
+    modal.hidden = true;
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
+  }
+  modal.addEventListener('click', e => { if (e.target.closest('[data-modal-close]')) closeLegal(); });
+  $('#legalAccept').addEventListener('click', () => {
+    const box = consentFor && form.querySelector(`input[name="${consentFor}"]`);
+    if (box) { box.checked = true; box.dispatchEvent(new Event('change', { bubbles: true })); }
+    if ($$('.consent input', form).every(x => x.checked)) $('#consentErr').textContent = '';
+    box?.closest('.consent')?.classList.remove('is-invalid');
+    closeLegal();
+  });
+  modal.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { e.preventDefault(); closeLegal(); return; }
+    if (e.key !== 'Tab') return;
+    const f = $$('button:not([hidden]), a[href], [tabindex="0"]', modal).filter(el => el.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-legal]'); if (!a) return;
+    e.preventDefault(); e.stopPropagation();
+    openLegal(a.dataset.legal, a.dataset.consent || null);
+  }, true);
+
+  /* ---------- Deep links: #program, #faq, #privacy-policy … ---------- */
+  function route(animate) {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (!h) return;
+    if (LEGAL[h]) { openLegal(h); return; }
+    showSection(h, { updateHash: false, animate });
+  }
+  window.addEventListener('hashchange', () => route(true));
+  showSection(currentSection, { updateHash: false, animate: false });
+  route(false);
 
 
   /* ---------- Prototype bridge ---------- */
@@ -1080,8 +2135,9 @@ body{overflow:hidden}
     nextBtn.disabled = false; maxReached = 0; go(0, { focus: false }); form.scrollTop = 0;
   }
   window.URUS = {
-    restart,
-    decline(){ restart(); showFinal('#declineScreen', [titleP, params.get('first_name'), params.get('last_name')].filter(Boolean).join(' ')); },
+    restart(){ restart(); showSection('registration'); },
+    decline(){ restart(); showSection('registration'); showFinal('#declineScreen', [titleP, params.get('first_name'), params.get('last_name')].filter(Boolean).join(' ')); },
+    openLegal,
   };
   /* ---------- Intro motion ---------- */
   requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('is-ready')));
@@ -1176,7 +2232,7 @@ window.__EMAILS__ = [{"id": "01-invitation", "label": "Invitation", "when": "Wit
       if (h === '#rsvp-yes') { window.URUS.restart(); history.replaceState(null,'','#web'); setView('web'); }
       else if (h === '#rsvp-no') { window.URUS.decline(); history.replaceState(null,'','#web'); setView('web'); }
       else if (h === '#calendar') say('In production this button downloads the event (.ics).');
-      else if (h === '#privacy') say('Privacy policy link pending from the client.');
+      else if (h === '#privacy') { history.replaceState(null,'','#web'); setView('web'); window.URUS.openLegal('privacy-policy'); }
     });
   });
   window.addEventListener('resize', () => setTimeout(fit, 150));
@@ -1194,7 +2250,7 @@ window.__EMAILS__ = [{"id": "01-invitation", "label": "Invitation", "when": "Wit
       }
       return;
     }
-    const a = ev.target.closest('#viewWeb a[href^="#"]');
+    const a = ev.target.closest('#viewWeb a[href^="#"]:not([data-legal]):not([data-section-link])');
     if (a) { ev.preventDefault(); say('Legal link pending from the client.'); }
   });
 
