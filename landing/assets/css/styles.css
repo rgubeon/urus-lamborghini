@@ -577,3 +577,99 @@ body{overflow:hidden}
   .page{padding-top:calc(var(--hdr) + var(--gap-v));padding-bottom:calc(var(--foot-b) + var(--foot-h) + var(--gap-v))}
   .site-foot{bottom:var(--foot-b);line-height:var(--foot-h)}
 }
+
+/* ==========================================================================
+   Typography system — matched to lamborghini.com (preowned.lamborghini.com)
+   Display  · Lambotype UltraCnd Bold, uppercase       (H1 on lamborghini.com)
+   Heading  · Lambotype Bold, sentence case             (H2/H3)
+   Action   · Lambotype Cnd Bold, uppercase, 18/28, no tracking   (buttons, menu, nav)
+   Label    · Lambotype Bold, uppercase, no tracking    (eyebrows, small labels, footer links)
+   Body     · Lambotype Regular 16/26                   (text, fields)
+   Colours are unchanged (URUS yellow stays).
+   ========================================================================== */
+:root{
+  --t-display:"Lambotype UltraCnd","Arial Narrow",Impact,sans-serif;
+  --t-text:"Lambotype",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --t-action:"Lambotype Cnd","Arial Narrow",Arial,sans-serif;
+}
+/* Display */
+.step__title,.day__n,.modal__title{font-family:var(--t-display);font-weight:700;letter-spacing:normal}
+/* Actions: buttons, tabs, menu */
+.btn,.btn--ghost,.stepper button,.topbar__menu,.megamenu__main a,.progress__row b,.modal__foot .btn{
+  font-family:var(--t-action);font-weight:700;text-transform:uppercase;letter-spacing:normal}
+.btn{font-size:18px;line-height:28px;min-height:60px;padding:0 24px}
+.btn--ghost{font-size:16px;line-height:26px;padding:0 8px}
+.stepper button,.stepper li.is-current button,.stepper li.is-done button{font-weight:700;font-size:clamp(13px,.95vw,16px);line-height:24px}
+.stepper button{color:var(--faint)}
+.stepper li.is-done button{color:var(--muted)}
+.stepper li.is-current button{color:#fff}
+.topbar__menu{font-size:18px;line-height:28px}
+.megamenu__main a{font-size:18px;line-height:28px}
+.progress__row b{font-size:16px}
+/* Labels / eyebrows */
+.group__title,.modal__kicker,.summary h3,.consent b,.concierge b,.day__date,.points em,.modal__body h3{
+  font-family:var(--t-text);font-weight:700;text-transform:uppercase;letter-spacing:normal}
+.group__title,.modal__body h3{font-size:13px;line-height:20px}
+.modal__kicker,.summary h3,.consent b,.concierge b{font-size:12px;line-height:18px}
+.day__date{font-size:12px}
+.points em{font-size:10px;line-height:14px}
+.summary button{font-family:var(--t-text);font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:normal}
+/* Headings in content (H3 level) */
+.faq__q{font-family:var(--t-text);font-weight:700;font-size:16px;line-height:24px}
+.final .lead{font-family:var(--t-text);font-weight:700}
+/* Body */
+.step__intro,.info__p,.day__list,.faq details p,.final p,.consent p{font-family:var(--t-text);font-weight:400}
+.step__intro,.info__p,.day__list,.faq details p{font-size:16px;line-height:26px}
+.note{font-size:14px;line-height:22px}
+.modal__body{font-size:15px;line-height:24px}
+.summary dl{font-size:15px;line-height:24px}
+.f input,.f select,.f textarea{font-family:var(--t-text);font-weight:400;font-size:16px}
+.f label{font-family:var(--t-text);font-weight:400}
+.choice span{font-family:var(--t-text);font-weight:400;font-size:15px}
+.megamenu__sub a{font-family:var(--t-text);font-weight:400;font-size:16px;line-height:26px}
+.hero__kicker,.hero__meta{font-family:var(--t-text);font-weight:400}
+/* Footer: links as on lamborghini.com (bold, uppercase) */
+.site-foot{font-family:var(--t-text);font-weight:400;font-size:11px}
+.site-foot a{font-weight:700;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.7);letter-spacing:normal}
+.site-foot a:hover,.site-foot a:focus-visible{color:#fff}
+@media (max-width:900px){
+  .btn{font-size:16px;line-height:26px;min-height:54px}
+  .step__intro,.info__p,.day__list,.faq details p{font-size:15px;line-height:24px}
+}
+
+/* ==========================================================================
+   Buttons — LAM web UI component (dark layer mode)
+   Form buttons are white (button/primary) instead of Urus yellow, to avoid
+   clashing with the Lamborghini interactive colours.
+   primary : bg #FFF · hover #C4C4C4 · pressed #F5F5F5 · disabled #969696 · label #000
+   focus   : 2px inside border #1E90FF
+   ghost   : text only · white → #C4C4C4 on hover
+   size    : Medium 56px · padding 16 · gap 16 (Large 72 / Small 40 available)
+   ========================================================================== */
+:root{--lam-focus:#1E90FF}
+.btn{position:relative;z-index:0;overflow:visible;display:inline-flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:56px;height:56px;min-width:128px;padding:0 16px;border:0;background:#fff;color:#000;text-align:left;
+  transition:background-color .2s ease,color .2s ease,box-shadow .15s ease}
+.btn::before{display:none!important}
+.btn:hover{background:#C4C4C4;color:#000}
+.btn:active{background:#F5F5F5;color:#000}
+.btn:focus-visible{outline:none;background:#fff;color:#000;box-shadow:inset 0 0 0 2px var(--lam-focus)}
+.btn[disabled]{background:#969696;color:#000;opacity:1}
+/* icon: a thin arrow drawn as a mask, coloured by the label colour */
+.btn .arrow{display:inline-block;width:16px;height:16px;font-size:0;line-height:0;flex:none;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 8h13M9 3l5 5-5 5' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 8h13M9 3l5 5-5 5' fill='none' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform .3s var(--ease)}
+.btn:hover .arrow{transform:translateX(3px)}
+/* ghost */
+.btn--ghost{background:transparent;color:#fff;min-width:0;padding:0 16px;justify-content:center}
+.btn--ghost:hover{background:transparent;color:#C4C4C4}
+.btn--ghost:active{background:transparent;color:#F5F5F5}
+.btn--ghost:focus-visible{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px var(--lam-focus)}
+@media (max-width:900px){
+  .btn{height:56px;min-height:56px;font-size:18px;line-height:28px}
+  .card .actions .btn:not(.btn--ghost){flex:1}
+}
+.btn .arrow--back{transform:scaleX(-1)}
+.btn:hover .arrow--back{transform:scaleX(-1) translateX(3px)}
+.btn--ghost{gap:12px}
