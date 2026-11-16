@@ -583,6 +583,13 @@ body{overflow:hidden}
   .topbar__menu{font-size:14px}
 }
 
+/* Equal breathing room above (under the header) and below (above the footer) the content */
+@media (min-width:901px){
+  :root{--gap-v:clamp(24px,5.5vh,72px);--foot-h:16px;--foot-b:calc(var(--edge) * .5)}
+  .page{padding-top:calc(var(--hdr) + var(--gap-v));padding-bottom:calc(var(--foot-b) + var(--foot-h) + var(--gap-v))}
+  .site-foot{bottom:var(--foot-b);line-height:var(--foot-h)}
+}
+
 /* ===== Prototype shell: view toggle + mailings viewer ===== */
 
 .proto-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:flex;align-items:center;gap:10px;padding:6px 6px 6px 14px;border-radius:999px;background:rgba(12,12,11,.88);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 40px rgba(0,0,0,.6);font-family:var(--font);max-width:calc(100vw - 32px)}
