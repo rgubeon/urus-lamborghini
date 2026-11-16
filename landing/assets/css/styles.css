@@ -455,3 +455,118 @@ body{overflow:hidden}
 .faq summary{transition:color .25s ease}
 .faq summary:hover .faq__q{color:#fff}
 .faq details:not([open]) summary:hover .faq__ico{border-color:var(--yellow)}
+
+/* ==========================================================================
+   Client feedback (lamborghini.com as reference)
+   - square / linear / rectangular shapes only
+   - icons in white, no circles
+   - header + menu as on lamborghini.com
+   ========================================================================== */
+@font-face{font-family:"Lambotype Cnd";src:url("../fonts/LambotypeCnd-Bold.woff2") format("woff2");font-weight:700;font-display:swap}
+:root{--hdr:64px;--font-cnd-b:"Lambotype Cnd","Arial Narrow",Arial,sans-serif}
+*,*::before,*::after{border-radius:0!important}
+.panel .card::-webkit-scrollbar-thumb,.modal__body::-webkit-scrollbar-thumb,.mv__canvas::-webkit-scrollbar-thumb{border-radius:0!important}
+
+/* ---------- Top bar ---------- */
+.secnav{display:none!important}
+.topbar{position:fixed;inset:0 0 auto;z-index:40;height:var(--hdr);background:rgba(24,24,24,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
+.topbar__in{height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 var(--edge-f)}
+.topbar__menu{all:unset;box-sizing:border-box;justify-self:start;cursor:pointer;display:inline-flex;align-items:center;gap:12px;height:44px;padding:0 4px;color:#fff;font-family:var(--font-cnd-b);font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+.topbar__menu:focus-visible{outline:2px solid var(--yellow);outline-offset:2px}
+.topbar__burger{position:relative;width:20px;height:14px;flex:none}
+.topbar__burger i{position:absolute;left:0;right:0;height:1.5px;background:#fff;transition:transform .35s var(--ease),opacity .25s,top .35s var(--ease)}
+.topbar__burger i:nth-child(1){top:0}.topbar__burger i:nth-child(2){top:6px}.topbar__burger i:nth-child(3){top:12px}
+.topbar__menu[aria-expanded="true"] .topbar__burger i:nth-child(1){top:6px;transform:rotate(45deg)}
+.topbar__menu[aria-expanded="true"] .topbar__burger i:nth-child(2){opacity:0}
+.topbar__menu[aria-expanded="true"] .topbar__burger i:nth-child(3){top:6px;transform:rotate(-45deg)}
+.topbar__menu:hover .topbar__menu-txt{color:var(--yellow)}
+.topbar__logo{justify-self:center;display:block;line-height:0}
+.topbar__logo img{height:44px;width:auto}
+.topbar__logo:focus-visible{outline:2px solid var(--yellow);outline-offset:4px}
+
+/* ---------- Mega menu ---------- */
+.megamenu{position:fixed;inset:var(--hdr) 0 0 0;z-index:35;background:#000;overflow-y:auto;animation:menuIn .4s var(--ease) both}
+@keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.megamenu__in{padding:clamp(28px,5vh,56px) var(--edge-f) 48px}
+.megamenu ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:clamp(24px,3vw,56px)}
+.megamenu__main a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0 14px;border-bottom:1px solid rgba(255,255,255,.28);color:#fff;text-decoration:none;font-family:var(--font-cnd-b);font-weight:700;font-size:16px;letter-spacing:.04em;text-transform:uppercase;transition:border-color .25s,color .25s}
+.megamenu__chev{width:8px;height:14px;flex:none;color:#fff;transition:transform .3s var(--ease)}
+.megamenu__main a:hover,.megamenu__main a:focus-visible{border-color:#fff;outline:none}
+.megamenu__main a:hover .megamenu__chev,.megamenu__main a:focus-visible .megamenu__chev{transform:translateX(4px)}
+.megamenu__main a[aria-current="page"]{color:var(--yellow);border-color:var(--yellow)}
+.megamenu__sub{margin-top:48px!important;padding-top:20px!important;border-top:1px solid rgba(255,255,255,.28)}
+.megamenu__sub a{display:block;padding:16px 0 12px;border-bottom:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;transition:color .25s,border-color .25s}
+.megamenu__sub a:hover,.megamenu__sub a:focus-visible{color:#fff;border-color:rgba(255,255,255,.45);outline:none}
+
+/* ---------- Layout with the bar ---------- */
+@media (min-width:901px){
+  .page{padding-top:calc(var(--hdr) + var(--vpad));padding-bottom:var(--vpad)}
+}
+
+/* ---------- Stepper as rectangular tabs ---------- */
+.stepper{gap:0 clamp(10px,1.4vw,22px);padding:0 clamp(12px,1.4vw,22px);margin:0;background:rgba(14,14,14,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.stepper button{padding:18px 0 14px;border:0;border-bottom:1px solid rgba(255,255,255,.28);color:var(--faint);font-size:clamp(10px,.72vw,12.5px);letter-spacing:.07em;text-transform:uppercase;font-weight:400;transition:color .3s,border-color .3s}
+.stepper li.is-current button{color:#fff;font-weight:700;border-bottom:2px solid var(--yellow);padding-bottom:13px}
+.stepper li.is-done button{color:var(--muted)}
+.stepper li.is-done button:hover{color:#fff;border-bottom-color:rgba(255,255,255,.6)}
+
+/* ---------- Buttons: rectangular, uppercase (lamborghini.com) ---------- */
+.btn{text-transform:uppercase;letter-spacing:.08em;font-size:14px}
+.btn--ghost{letter-spacing:.06em;font-size:13px}
+
+/* ---------- Icons: white, no circles ---------- */
+.ico{color:#fff}
+.ico-badge,.faq__ico{width:auto!important;height:auto!important;border:0!important;background:none!important;display:inline-flex}
+.ico-badge .ico,.faq__ico .ico{width:20px;height:20px;color:#fff!important}
+.faq details[open]:not(.is-closing) .faq__ico{background:none!important}
+.faq details[open]:not(.is-closing) .faq__ico .ico{color:#fff!important}
+.faq details:not([open]) summary:hover .faq__ico{border:0!important}
+.faq details p{padding-left:52px}
+.faq summary::after{border-color:#fff}
+.f select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23FFFFFF' stroke-width='1.4'/%3E%3C/svg%3E")}
+.group__title--ico{gap:10px}
+
+@media (max-width:900px){
+  :root{--hdr:56px}
+  .topbar__in{padding:0 16px}
+  .topbar__menu{font-size:14px;gap:10px}
+  .topbar__logo img{height:38px}
+  .hero{padding-top:calc(var(--hdr) + 14px)}
+  .hero__body{margin:0}
+  .megamenu ul{grid-template-columns:minmax(0,1fr)}
+  .megamenu__in{padding:16px 16px 40px}
+  .megamenu__main a{padding:18px 0 14px;font-size:15px}
+  .megamenu__sub{margin-top:28px!important}
+  .faq details p{padding-left:18px}
+}
+
+/* ==========================================================================
+   Round 2 feedback
+   ========================================================================== */
+/* Header: no fill over the background, taller; fill only while the menu is open */
+:root{--hdr:96px}
+.topbar{background:transparent;border-bottom:1px solid transparent;backdrop-filter:none;-webkit-backdrop-filter:none;transition:background-color .35s ease,border-color .35s ease}
+.menu-open .topbar{background:#0d0d0d;border-bottom-color:rgba(255,255,255,.08)}
+.topbar__menu{font-size:16px}
+.topbar__logo img{height:52px;width:auto}
+.topbar__right{display:none}
+
+/* Steps cross-fade in JS (no CSS entrance) */
+.step.is-current{animation:none}
+
+/* Scrollbars: a thin yellow line, no arrows, full opacity */
+.panel .card,.modal__body,.mv__canvas,.megamenu{scrollbar-width:auto;scrollbar-color:auto}
+@supports (-moz-appearance:none){
+  .panel .card,.modal__body,.mv__canvas,.megamenu{scrollbar-width:thin;scrollbar-color:#F2E500 transparent}
+}
+.panel .card::-webkit-scrollbar,.modal__body::-webkit-scrollbar,.mv__canvas::-webkit-scrollbar,.megamenu::-webkit-scrollbar{width:6px;height:6px;background:transparent}
+.panel .card::-webkit-scrollbar-track,.modal__body::-webkit-scrollbar-track,.mv__canvas::-webkit-scrollbar-track,.megamenu::-webkit-scrollbar-track{background:transparent}
+.panel .card::-webkit-scrollbar-thumb,.modal__body::-webkit-scrollbar-thumb,.mv__canvas::-webkit-scrollbar-thumb,.megamenu::-webkit-scrollbar-thumb{background:#F2E500;border:0;border-left:4px solid transparent;background-clip:padding-box;border-radius:0!important;min-height:40px}
+.panel .card::-webkit-scrollbar-button,.modal__body::-webkit-scrollbar-button,.mv__canvas::-webkit-scrollbar-button,.megamenu::-webkit-scrollbar-button{display:none;width:0;height:0}
+.panel .card::-webkit-scrollbar-corner,.modal__body::-webkit-scrollbar-corner{background:transparent}
+
+@media (max-width:900px){
+  :root{--hdr:68px}
+  .topbar__logo img{height:40px}
+  .topbar__menu{font-size:14px}
+}

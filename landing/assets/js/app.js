@@ -218,10 +218,12 @@
   /* ---------- Navigation ---------- */
   const bgLayers = $$('.bg__layer');
   function setBg(key) { bgLayers.forEach(l => l.classList.toggle('is-active', l.dataset.bg === key)); }
-  function go(i, { focus = true } = {}) {
+  /* Step change: the current step fades out, then the next one fades in (same feel as the sections) */
+  let stepToken = 0;
+  function go(i, { focus = true, animate = true } = {}) {
+    const prevIdx = current;
     current = Math.max(0, Math.min(i, steps.length - 1));
     maxReached = Math.max(maxReached, current);
-    steps.forEach((s, k) => s.classList.toggle('is-current', k === current));
     stepperItems.forEach((li, k) => {
       li.classList.toggle('is-current', k === current);
       li.classList.toggle('is-done', k !== current && (CONFIG.freeNavigation || k <= maxReached));
@@ -234,11 +236,50 @@
     nextBtn.innerHTML = current === steps.length - 1 ? 'Confirm <span class="arrow" aria-hidden="true">→</span>' : 'Continue <span class="arrow" aria-hidden="true">→</span>';
     if (current === steps.length - 1) buildSummary();
     setBg(steps[current].dataset.bg);
-    if (focus) {
-      form.scrollTo({ top: 0, behavior: 'smooth' });
-      steps[current].querySelector('.step__title')?.setAttribute('tabindex', '-1');
-      steps[current].querySelector('.step__title')?.focus({ preventScroll: true });
+
+    const prev = steps[prevIdx], next = steps[current];
+    const actions = $('#actions');
+    const token = ++stepToken;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const animated = animate && !reduce && prev !== next && prev.classList.contains('is-current') && !form.hidden && form.offsetParent !== null;
+    const OUT = 320, IN = 600, EASE = 'cubic-bezier(.22,1,.36,1)';
+    const swap = () => {
+      if (token !== stepToken) return;
+      const h0 = form.getBoundingClientRect().height;
+      steps.forEach((s, k) => s.classList.toggle('is-current', k === current));
+      form.scrollTop = 0;
+      if (animated) {
+        // the box glides to its new height while the new content fades in
+        const h1 = form.getBoundingClientRect().height;
+        if (Math.abs(h1 - h0) > 1) {
+          form.style.overflow = 'hidden';
+          const a = form.animate([{ height: h0 + 'px' }, { height: h1 + 'px' }], { duration: IN, easing: EASE });
+          a.onfinish = a.oncancel = () => { form.style.overflow = ''; };
+        }
+        [next, actions].forEach(el => el.animate(
+          [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
+          { duration: IN, easing: EASE, delay: 60, fill: 'backwards' }));
+      }
+      if (focus) {
+        const t = next.querySelector('.step__title');
+        if (t) { t.setAttribute('tabindex', '-1'); t.focus({ preventScroll: true }); }
+      }
+    };
+    if (!animated) {
+      // an instant change also clears any fade-out left by an interrupted transition
+      [actions, ...steps].forEach(el => el.getAnimations().forEach(a => { if (a.effect && a.effect.getTiming().fill === 'forwards') a.cancel(); }));
+      swap(); return Promise.resolve();
     }
+    const outs = [prev, actions];
+    return Promise.all(outs.map(el => el.animate(
+      [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-6px)' }],
+      { duration: OUT, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards' }).finished.catch(() => {})))
+      .then(() => {
+        const current_ = token === stepToken;
+        swap();
+        // always release the old step; release the buttons only if no newer change is running
+        (current_ ? outs : [prev]).forEach(el => el.getAnimations().forEach(a => { if (a.effect && a.effect.getTiming().fill === 'forwards') a.cancel(); }));
+      });
   }
   // Silent check (no painting) used to find the first incomplete step
   function stepIsValid(i) {
@@ -255,8 +296,7 @@
     const bad = steps.findIndex((_, i) => !stepIsValid(i));
     if (bad === -1) { submit(); return; }
     if (bad !== current) {
-      go(bad);
-      requestAnimationFrame(() => validateStep(bad));
+      go(bad).then(() => validateStep(bad));
       $('#consentErr').textContent = '';
     } else validateStep(current);
   });
@@ -369,12 +409,15 @@
         if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
       }
     };
-    if (!prev || prev === target || !animate || reduceMotion) { swapIn(); return true; }
+    const releaseAll = () => sections.forEach(sec => [sec, ...sec.children].forEach(el =>
+      el.getAnimations().forEach(a => { if (a.effect && a.effect.getTiming().fill === 'forwards') a.cancel(); })));
+    if (!prev || prev === target || !animate || reduceMotion) { releaseAll(); swapIn(); return true; }
     const outs = fadeTargets(prev);
     Promise.all(outs.map(el => el.animate(
       [{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-8px)' }],
       { duration: OUT_MS, easing: EASE_IN, fill: 'forwards' }).finished.catch(() => {})))
       .then(() => {
+        if (token !== swapToken) return;          // a newer transition owns the elements now
         swapIn();
         outs.forEach(el => el.getAnimations().forEach(a => { if (a.effect && a.effect.getTiming().fill === 'forwards') a.cancel(); }));
       });
@@ -382,6 +425,7 @@
   }
   function setMenu(open) {
     secMenu.hidden = !open; secBtn.setAttribute('aria-expanded', String(open));
+    document.documentElement.classList.toggle('menu-open', open);
     if (open) (secMenu.querySelector('[aria-current="page"]') || secMenu.querySelector('a')).focus();
   }
   secBtn.addEventListener('click', () => setMenu(secMenu.hidden));
@@ -395,7 +439,8 @@
     if (e.key === 'ArrowUp') { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
     if (e.key === 'Escape') { setMenu(false); secBtn.focus(); }
   });
-  document.addEventListener('click', e => { if (!secMenu.hidden && !e.target.closest('.secnav')) setMenu(false); });
+  document.addEventListener('click', e => { if (!secMenu.hidden && !e.target.closest('.megamenu, #secnavBtn')) setMenu(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !secMenu.hidden) { setMenu(false); secBtn.focus(); } });
 
   /* ---------- FAQ: smooth, exclusive accordion ---------- */
   const faqItems = $$('.faq details');
@@ -488,11 +533,13 @@
   document.addEventListener('click', e => {
     const a = e.target.closest('[data-legal]'); if (!a) return;
     e.preventDefault(); e.stopPropagation();
+    if (!secMenu.hidden) setMenu(false);
     openLegal(a.dataset.legal, a.dataset.consent || null);
   }, true);
 
   /* ---------- Deep links: #program, #faq, #privacy-policy … ---------- */
   function route(animate) {
+    if (!secMenu.hidden) setMenu(false);
     const h = decodeURIComponent(location.hash.slice(1));
     if (!h) return;
     if (LEGAL[h]) { openLegal(h); return; }
