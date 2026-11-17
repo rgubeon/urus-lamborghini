@@ -673,3 +673,34 @@ body{overflow:hidden}
 .btn .arrow--back{transform:scaleX(-1)}
 .btn:hover .arrow--back{transform:scaleX(-1) translateX(3px)}
 .btn--ghost{gap:12px}
+
+/* ===== Lamborghini feedback (17 nov) ===== */
+/* 1. Header: solid horizontal bar like lamborghini.com (always filled) */
+.topbar,.menu-open .topbar{background:#000;border-bottom:1px solid rgba(255,255,255,.1);backdrop-filter:none;-webkit-backdrop-filter:none}
+
+/* 2. Multi-choice = CI chips: square, thin white line; selected = white fill, black text + × */
+.choices{gap:8px}
+.choice span{display:inline-flex;align-items:center;gap:10px;min-height:36px;padding:8px 12px;border:1px solid rgba(255,255,255,.6);background:transparent;color:#fff;
+  font-family:var(--t-text);font-weight:700;font-size:13px;line-height:18px;text-transform:uppercase;letter-spacing:normal;transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.choice input[type=checkbox]+span::before{display:none}
+.choice input[type=checkbox]+span::after{content:"";display:none;width:9px;height:9px;flex:none;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat}
+.choice:hover input[type=checkbox]:not(:checked)+span{border-color:#fff}
+.choice input[type=checkbox]:checked+span{background:#fff;border-color:#fff;color:#000}
+.choice input[type=checkbox]:checked+span::after{display:block}
+.choice input:focus-visible+span{outline:none;box-shadow:0 0 0 2px var(--lam-focus)}
+.choices.is-invalid .choice input[type=checkbox]+span{border-color:var(--error)}
+
+/* 3. Single choice = round radios (CI salutation reference) */
+.choices--radio{gap:8px 32px}
+.choice input[type=radio]+span{border:0;background:transparent;padding:6px 0;gap:12px;color:#fff;font-size:15px;line-height:24px}
+.choice input[type=radio]+span::before{content:"";display:block;width:22px;height:22px;flex:none;box-sizing:border-box;border:1.5px solid #fff;border-radius:50%!important;background:transparent;box-shadow:none;transition:background .2s ease}
+.choice input[type=radio]:checked+span{background:transparent;color:#fff}
+.choice input[type=radio]:checked+span::before{border-color:#fff;background:radial-gradient(circle,#fff 0 5px,transparent 5.6px);box-shadow:none}
+.choice:hover input[type=radio]:not(:checked)+span::before{background:rgba(255,255,255,.12)}
+.choice input[type=radio]:focus-visible+span{box-shadow:none}
+.choice input[type=radio]:focus-visible+span::before{box-shadow:0 0 0 2px var(--lam-focus)}
+.choices.is-invalid .choice input[type=radio]+span::before{border-color:var(--error)}
+.titlesel{margin:0 0 16px}
+.titlesel .q{margin:0 0 4px}

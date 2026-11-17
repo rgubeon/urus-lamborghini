@@ -8,7 +8,6 @@
 <title>Urus Registration Prototype</title>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
 </head>
-<body>
 <style>
 /* ==========================================================================
    URUS AT ITS PEAK — Media registration
@@ -686,6 +685,37 @@ body{overflow:hidden}
 .btn:hover .arrow--back{transform:scaleX(-1) translateX(3px)}
 .btn--ghost{gap:12px}
 
+/* ===== Lamborghini feedback (17 nov) ===== */
+/* 1. Header: solid horizontal bar like lamborghini.com (always filled) */
+.topbar,.menu-open .topbar{background:#000;border-bottom:1px solid rgba(255,255,255,.1);backdrop-filter:none;-webkit-backdrop-filter:none}
+
+/* 2. Multi-choice = CI chips: square, thin white line; selected = white fill, black text + × */
+.choices{gap:8px}
+.choice span{display:inline-flex;align-items:center;gap:10px;min-height:36px;padding:8px 12px;border:1px solid rgba(255,255,255,.6);background:transparent;color:#fff;
+  font-family:var(--t-text);font-weight:700;font-size:13px;line-height:18px;text-transform:uppercase;letter-spacing:normal;transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.choice input[type=checkbox]+span::before{display:none}
+.choice input[type=checkbox]+span::after{content:"";display:none;width:9px;height:9px;flex:none;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1L1 9' stroke='%23000' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat}
+.choice:hover input[type=checkbox]:not(:checked)+span{border-color:#fff}
+.choice input[type=checkbox]:checked+span{background:#fff;border-color:#fff;color:#000}
+.choice input[type=checkbox]:checked+span::after{display:block}
+.choice input:focus-visible+span{outline:none;box-shadow:0 0 0 2px var(--lam-focus)}
+.choices.is-invalid .choice input[type=checkbox]+span{border-color:var(--error)}
+
+/* 3. Single choice = round radios (CI salutation reference) */
+.choices--radio{gap:8px 32px}
+.choice input[type=radio]+span{border:0;background:transparent;padding:6px 0;gap:12px;color:#fff;font-size:15px;line-height:24px}
+.choice input[type=radio]+span::before{content:"";display:block;width:22px;height:22px;flex:none;box-sizing:border-box;border:1.5px solid #fff;border-radius:50%!important;background:transparent;box-shadow:none;transition:background .2s ease}
+.choice input[type=radio]:checked+span{background:transparent;color:#fff}
+.choice input[type=radio]:checked+span::before{border-color:#fff;background:radial-gradient(circle,#fff 0 5px,transparent 5.6px);box-shadow:none}
+.choice:hover input[type=radio]:not(:checked)+span::before{background:rgba(255,255,255,.12)}
+.choice input[type=radio]:focus-visible+span{box-shadow:none}
+.choice input[type=radio]:focus-visible+span::before{box-shadow:0 0 0 2px var(--lam-focus)}
+.choices.is-invalid .choice input[type=radio]+span::before{border-color:var(--error)}
+.titlesel{margin:0 0 16px}
+.titlesel .q{margin:0 0 4px}
+
 /* ===== Prototype shell: view toggle + mailings viewer ===== */
 
 .proto-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;display:flex;align-items:center;gap:10px;padding:6px 6px 6px 14px;border-radius:999px;background:rgba(12,12,11,.88);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 10px 40px rgba(0,0,0,.6);font-family:var(--font);max-width:calc(100vw - 32px)}
@@ -886,12 +916,14 @@ body{overflow:hidden}
           <h2 class="step__title" id="s1t">Personal data</h2>
           <p class="step__intro">Fields marked with * are mandatory.</p>
         </div>
-        <div class="grid grid--3">
-          <div class="f">
-            <select id="title" name="title" required>
-              <option value="" disabled selected></option><option>Mr.</option><option>Ms.</option>
-            </select><label for="title">Title*</label>
+        <div class="titlesel">
+          <p class="q" id="titleQ">Title*</p>
+          <div class="choices choices--radio" role="radiogroup" aria-labelledby="titleQ" data-required-group="title">
+            <label class="choice"><input type="radio" name="title" value="Mr." required><span>Mr.</span></label>
+            <label class="choice"><input type="radio" name="title" value="Ms."><span>Ms.</span></label>
           </div>
+        </div>
+        <div class="grid">
           <div class="f"><input id="first_name" name="first_name" required placeholder=" " autocomplete="given-name"><label for="first_name">First name*</label></div>
           <div class="f"><input id="last_name" name="last_name" required placeholder=" " autocomplete="family-name"><label for="last_name">Last name*</label></div>
         </div>
@@ -994,7 +1026,7 @@ body{overflow:hidden}
           <legend class="group__title">Hotel accommodation</legend>
           <p class="note">Our concierge team will reserve a room — double for single use — under your name from <b data-wave-from>check-in</b> to <b data-wave-to>check-out</b> at <strong>Hotel Alfonso XIII</strong>, Calle San Fernando 2, Seville — <a href="https://www.marriott.com/en-us/hotels/svqlc-hotel-alfonso-xiii-a-luxury-collection-hotel-seville/overview/" target="_blank" rel="noopener">Website</a>.</p>
           <p class="q">Please confirm you need the room*</p>
-          <div class="choices" data-required-group="hotel">
+          <div class="choices choices--radio" data-required-group="hotel">
             <label class="choice"><input type="radio" name="hotel" value="Yes" required><span>Yes</span></label>
             <label class="choice"><input type="radio" name="hotel" value="No"><span>No</span></label>
           </div>
@@ -1027,7 +1059,7 @@ body{overflow:hidden}
         <fieldset class="group">
           <legend class="sr-only">Track activities</legend>
           <p class="q">Would you like to request media activities?*</p>
-          <div class="choices" data-required-group="activities">
+          <div class="choices choices--radio" data-required-group="activities">
             <label class="choice"><input type="radio" name="activities" value="Yes" required><span>Yes</span></label>
             <label class="choice"><input type="radio" name="activities" value="No"><span>No</span></label>
           </div>
@@ -1111,7 +1143,7 @@ body{overflow:hidden}
 
     <!-- ============ PROGRAM ============ -->
     <section class="card info" data-section="program" data-label="Program" data-bg="arcs" hidden aria-labelledby="progT">
-      <h2 class="step__title" id="progT">Event program <span class="y">overview</span></h2>
+      <h2 class="step__title" id="progT">Event program overview</h2>
       <ol class="days">
         <li class="day">
           <p class="day__head"><span class="day__n">Day 1</span><span class="day__date" data-day="0"></span></p>
@@ -1155,7 +1187,7 @@ body{overflow:hidden}
 
     <!-- ============ TRAVEL & ACCOMMODATION ============ -->
     <section class="card info" data-section="travel" data-label="Travel &amp; Accommodation" data-bg="curtain" hidden aria-labelledby="travT">
-      <h2 class="step__title" id="travT">Travel &amp; <span class="y">accommodation</span></h2>
+      <h2 class="step__title" id="travT">Travel &amp; accommodation</h2>
       <div class="group">
         <h3 class="group__title group__title--ico"><span class="ico-badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-shuttle"/></svg></span>Ground transportation</h3>
         <p class="info__p">Our team will welcome you to the airport and guide you to our dedicated event shuttles.</p>
